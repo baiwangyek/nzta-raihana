@@ -13,6 +13,8 @@ export default class RhButton extends PolymerElement {
           padding: 14px;
           border-radius: 50px;
           cursor: pointer;
+
+          @apply --custom-button-styles;
         }
       </style>
       <button class="button font-weight--bold">[[label]]</button>

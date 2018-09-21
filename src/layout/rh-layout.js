@@ -9,6 +9,7 @@ export default class RhLayout extends PolymerElement {
           width: 600px;
           height: 100vh;
           margin: 0 auto;
+          padding-top: 90px;
         }
       </style>
       <div class="layout-container">
