@@ -15,7 +15,7 @@
   src: url('../fonts/Objectivity/Objectivity-Bold.otf');
 } */
 
-* {
+* { 
   font-family: 'Montserrat Alternates', sans-serif;
   /* keep fonts similar weight for different browsers */
   -webkit-font-smoothing: antialiased;
