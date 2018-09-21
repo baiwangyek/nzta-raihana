@@ -5,17 +5,7 @@
   700 - bold
 */
 
-/* @font-face {
-  font-family: 'ObjectivityReg';
-  src: url('../fonts/Objectivity/Objectivity-Regular.woff2') format('woff2');
-} */
-
-/* @font-face {
-  font-family: 'ObjectivityBold'; 
-  src: url('../fonts/Objectivity/Objectivity-Bold.otf');
-} */
-
-* { 
+* {
   font-family: 'Montserrat Alternates', sans-serif;
   /* keep fonts similar weight for different browsers */
   -webkit-font-smoothing: antialiased;
