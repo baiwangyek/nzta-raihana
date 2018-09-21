@@ -10,7 +10,7 @@ export default class RhButton extends PolymerElement {
           color: white;
           font-size: 14px;
           border: none;
-          padding: 14px;
+          padding: 14px 40px;
           border-radius: 50px;
           cursor: pointer;
 

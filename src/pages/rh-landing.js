@@ -27,7 +27,7 @@ export default class RhLanding extends PolymerElement {
       </style>
       <rh-layout>
         <div slot="content">
-          <h1 class="h1 font-weight--bold landing-title">Landing Page</h1>
+          <h1 class="h1 font-weight--bold landing-title title-spacing">Landing Page</h1>
           <rh-button class="landing-button" label="Login/ register with facebook"></rh-button>
           <rh-button class="landing-button" label="Learn more"></rh-button>
         </div>
