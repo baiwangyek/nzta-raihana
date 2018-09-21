@@ -1,5 +1,8 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { globalCSS } from '../global-css/global-css';
+
+import '@polymer/app-route/app-location.js';
+
 import RhLayout from '../layout/rh-layout.js';
 import RhButton from '../elements/rh-button.js';
 
@@ -25,10 +28,11 @@ export default class RhLanding extends PolymerElement {
           }
         }
       </style>
+      <app-location route="{{route}}"></app-location>
       <rh-layout>
         <div slot="content">
           <h1 class="h1 font-weight--bold landing-title">Landing Page</h1>
-          <rh-button class="landing-button" label="Login/ register with facebook"></rh-button>
+          <rh-button class="landing-button" label="Login/ register with facebook" on-click="login"></rh-button>
           <rh-button class="landing-button" label="Learn more"></rh-button>
         </div>
       </rh-layout>
@@ -44,6 +48,14 @@ export default class RhLanding extends PolymerElement {
   }
   connectedCallback() {
     super.connectedCallback();
+  }
+
+  login() {
+    /*
+      TODO
+      - INSERT YOUR FIREBASE SDK LOGIC HERE
+    */
+   this.set('route.path','/applicationList');
   }
 }
 window.customElements.define('rh-landing', RhLanding);
