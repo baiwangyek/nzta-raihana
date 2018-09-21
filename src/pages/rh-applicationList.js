@@ -21,7 +21,7 @@ export default class RhApplicationList extends PolymerElement {
           border: 1px solid #979797;
           max-width: 400px;
           padding: 10px;
-          background: #D8D8D8;
+          background: #eee;
           margin: 15px auto;
         }
       </style>
