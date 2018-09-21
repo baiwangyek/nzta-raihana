@@ -1,0 +1,68 @@
+/*
+  FONT WEIGHT NUM
+  400 - regular
+  500 - medium
+  700 - bold
+*/
+
+/* @font-face {
+  font-family: 'ObjectivityReg';
+  src: url('../fonts/Objectivity/Objectivity-Regular.woff2') format('woff2');
+} */
+
+/* @font-face {
+  font-family: 'ObjectivityBold'; 
+  src: url('../fonts/Objectivity/Objectivity-Bold.otf');
+} */
+
+* {
+  font-family: 'Montserrat Alternates', sans-serif;
+  /* keep fonts similar weight for different browsers */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.h1 {
+  font-size: 56px;
+}
+
+.p {
+  font-size: 16px;
+}
+
+.p--small {
+  font-size: 14px;
+}
+
+.caption {
+  font-size: 12px;
+}
+
+.font-weight--light {
+  font-weight: 300;
+}
+
+.font-weight--reg {
+  font-weight: 400
+}
+
+/* .font-weight--med {
+  font-weight: 500
+} */
+
+.font-weight--bold {
+  font-weight: 700;
+  /* font-family: 'ObjectivityBold', sans-serif;  */
+}
+
+.color--primary {
+  color: var(--primary);
+}
+
+.color--alert {
+  color: var(--alert);
+}
+
+.text-capitalize {
+  text-transform: capitalize
+}
