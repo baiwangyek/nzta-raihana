@@ -44,7 +44,6 @@ export default class RhInput extends PolymerElement {
           width: 100%;
           font-size: 14px;
         }
-
       </style>
       <div>
         <p style="padding-bottom: 5px;" class="label font-weight--bold">[[label]]</p>

@@ -68,7 +68,7 @@ export default class RhPersonalListPersonal extends PolymerElement {
           <rh-input class="page-item half-item" type="text" placeholder="021456382" label="Phone number"></rh-input>
           <rh-input class="page-item half-item" type="text" placeholder="Indeterminate" label="Gender"></rh-input>
           <div class="CTA-container">
-            <rh-button label="Next"></rh-button>
+            <rh-button label="Next" on-click="goToApplicationStep"></rh-button>
             <rh-button ghost on-click="goBack" label="Back"></rh-button>
           </div>
         </div>
@@ -93,5 +93,26 @@ export default class RhPersonalListPersonal extends PolymerElement {
   goBack() {
     window.history.back();
   }
+
+  goToApplicationStep() {
+    
+    var database = firebase.firestore();
+    database.collection("user-details").doc("personal_info").set({
+      address: "test add",
+      birthplace: "Auckland",
+      birthday: Date.now(),
+      first_name: "Jane",
+      gender: "female",
+      last_name: "Doe",
+      phone_num: "+640000000"
+    })
+    .then(function() {
+        console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    });
+  }
+  
 }
 window.customElements.define('rh-application-list-personal', RhPersonalListPersonal);

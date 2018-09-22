@@ -1,6 +1,7 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { globalCSS } from '../global-css/global-css';
 
+
 import '@polymer/app-route/app-location.js';
 
 import RhLayout from '../layout/rh-layout.js';
@@ -51,11 +52,28 @@ export default class RhLanding extends PolymerElement {
   }
 
   login() {
-    /*
-      TODO
-      - INSERT YOUR FIREBASE SDK LOGIC HERE
-    */
+  // Get a reference to the database service
+    var database = firebase.firestore();
+    database.collection("user-details").doc("personal_info").set({
+      address: "test add",
+      birthplace: "Auckland",
+      birthday: Date.now(),
+      first_name: "Jane",
+      gender: "female",
+      last_name: "Doe",
+      phone_num: "+640000000"
+  })
+  .then(function() {
+      console.log("Document successfully written!");
+  })
+  .catch(function(error) {
+      console.error("Error writing document: ", error);
+  });
+   
    this.set('route.path','/applicationList');
+  }
+  writeUserData(userId, name, email, imageUrl) {
+    
   }
 }
 window.customElements.define('rh-landing', RhLanding);

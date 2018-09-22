@@ -91,6 +91,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-- Load your application shell -->
     <script type="module" src="src/rh-app.js"></script>
 
+    <!-- Load your application shell -->
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>  
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-firestore.js"></script>  
+    <script>
+      var config = {
+      apiKey: "AIzaSyA-kqOhpxUiD9xX5bb0iV5wxlkz5X-Dv-M",
+      authDomain: "nzta-raihana.firebaseapp.com",
+      databaseURL: "https://nzta-raihana.firebaseio.com",
+      storageBucket: "bucket.appspot.com",
+      projectId: "nzta-raihana"
+    };
+    firebase.initializeApp(config);
+    // var database = firebase.database();
+    </script>
+
     <!-- Add any global styles for body, document, etc. -->
     <style>
       body {
