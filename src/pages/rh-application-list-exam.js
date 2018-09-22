@@ -2,6 +2,7 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { globalCSS } from '../global-css/global-css';
 
 import '@polymer/iron-image/iron-image.js';
+import '@polymer/iron-pages/iron-pages.js';
 
 export default class RhApplicationListExam extends PolymerElement {
   static get template() {
@@ -96,18 +97,22 @@ export default class RhApplicationListExam extends PolymerElement {
           <p class="header-questions font-weight--bold">35 questions left</p>
         </div>
       </div>
-      <div class="question-container">
-        <h2 class="question-title h2 font-weight--med">Questions 1</h2>
-        <iron-image class="question-image" sizing="cover" preload src="../../images/exam-1.png"></iron-image>
-        <p class="question-description" class="h3 font-weight--med">Select the correct answer. You're a good driver if...</p>
-        <div class="answers-container">
-          <template is="dom-repeat" items="[[answersList]]">
-            <div class="answers-card" on-click="goToExamDone">
-              <p class="answers-text">[[item]]</p>
+      <iron-pages selected="[[examPage]]" attr-for-selected="page">
+        <template is="dom-repeat" items="[1,2,3,4,5]">
+          <div page=[[item]] class="question-container">
+            <h2 class="question-title h2 font-weight--med">Questions [[item]]</h2>
+            <iron-image class="question-image" sizing="cover" preload src="../../images/exam-1.png"></iron-image>
+            <p class="question-description" class="h3 font-weight--med">Select the correct answer. You're a good driver if...</p>
+            <div class="answers-container">
+              <template is="dom-repeat" items="[[answersList]]">
+                <div class="answers-card" on-click="goToExamDone">
+                  <p class="answers-text">[[item]]</p>
+                </div>
+              </template>
             </div>
-          </template>
-        </div>
-      </div>
+          </div>
+        </template>
+      </iron-pages>
     `;
   }
   static get properties(){
@@ -115,6 +120,10 @@ export default class RhApplicationListExam extends PolymerElement {
       answersList: {
         type: Array,
         value: ['You ask what’s going on around you', 'You’re totally aware of what\’s going on around you', 'You have no idea what\’s going on around you', 'You’re often aware of what\’s going on around you']
+      },
+      examPage: {
+        type: Number,
+        default: 1
       }
     }
   }
@@ -127,7 +136,10 @@ export default class RhApplicationListExam extends PolymerElement {
   }
 
   goToExamDone() {
-    this.set('route.path', '/applicationList/exam-done');
+    (this.examPage === 5)?
+      this.set('route.path', '/applicationList/exam-done'):
+      this.set('examPage', this.examPage+1);
+    // this.set('route.path', '/applicationList/exam-done');
   }
 }
 window.customElements.define('rh-application-list-exam', RhApplicationListExam);
