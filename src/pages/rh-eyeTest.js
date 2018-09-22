@@ -248,6 +248,18 @@ export default class RhEyeTest extends PolymerElement {
           </div>
 
 
+          <template is="dom-if" if="{{_isEqualTo(mode, 'setup')}}">
+            <a href="/applicationList/exam" style="color: #b2d3d8">
+              ...
+            </a>
+          </template>
+
+          <template is="dom-if" if="{{_isEqualTo(mode, 'sitting')}}">
+            <a href="/applicationList/exam" style="color: #b2d3d8">
+              ...
+            </a>
+          </template>
+
           <template is="dom-if" if="{{_isEqualTo(mode, 'passed')}}">
             <a href="/applicationList/exam">
               <rh-button data-id="123" data-step$=[[item.step]] label="Next"></rh-button>
@@ -279,7 +291,7 @@ export default class RhEyeTest extends PolymerElement {
 
                 <template is="dom-if" if=[[showTheRightScreen]]>
                   
-                  <div class="h3" style="text-align: center">
+                  <div class="h3" style="text-align: center; height: 30px">
                     &nbsp;
                     <template is="dom-if" if="{{moreThan5BadFramaesForLast3Seconds(badFramaesForLast3Seconds)}}">
                       <span>Stop cheating, step back 😠</span>
