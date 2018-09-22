@@ -5,6 +5,7 @@ import '@polymer/app-route/app-location.js';
 
 import RhLayout from '../layout/rh-layout.js';
 import RhButton from '../elements/rh-button.js';
+import RhInput from '../elements/rh-input.js';
 export default class RhApplicationList extends PolymerElement {
   static get template() {
     return html`
@@ -30,8 +31,8 @@ export default class RhApplicationList extends PolymerElement {
         <div slot="content">
           <h2 class="h2 font-weight--bold application-list-title title-spacing">Eye Test</h2>
           <p>🅱</p>
-          <rh-input id="eye-test-character"/>
-          <rh-button data-id="123" data-step$=[[item.step]] label="Next" on-click="checkEyeTestCharacter()"></rh-button>
+          <rh-input id="eye-test-character"></rh-input>
+          <rh-button data-id="123" data-step$=[[item.step]] label="Next" on-click="checkEyeTestCharacter"></rh-button>
         </div>
       </rh-layout>
     `;
@@ -54,7 +55,7 @@ export default class RhApplicationList extends PolymerElement {
   }
 
   checkEyeTestCharacter(e) {
-    const character = this.shadowRoot.querySelector("#eye-test-character").value;
+    const character = this.shadowRoot.querySelector("#eye-test-character").getValue();
     console.log('character',character);
   }
 

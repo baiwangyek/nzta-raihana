@@ -1,9 +1,7 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { globalCSS } from '../global-css/global-css';
 export default class RhInput extends PolymerElement {
-  constructor() {
 
-  }
   static get template() {
     return html`
       ${globalCSS}
