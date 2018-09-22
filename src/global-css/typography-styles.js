@@ -28,6 +28,10 @@ export const typographyStyles = html`
       font-size: 24px;
     }
 
+    .h4 {
+      font-size: 20px;
+    }
+
     .p {
       font-size: 16px;
     }

@@ -68,6 +68,7 @@ class RhApp extends PolymerElement {
         <rh-eye-test name="eyeTest"></rh-eye-test>
         <rh-application-list-medical name="medical"></rh-application-list-medical>
         <rh-application-list-personal name="personal"></rh-application-list-personal>
+        <rh-application-list-before-exam name="before-exam"></rh-application-list-before-exam>
         <rh-application-list-exam name="exam"></rh-application-list-exam>
         <rh-application-list-exam-done name="exam-done"></rh-application-list-exam-done>
         <rh-complete name="complete"></rh-complete>
@@ -111,7 +112,7 @@ class RhApp extends PolymerElement {
     else if(page==='applicationList') {
       if(subPage){
         this.page = subPage;
-        if(subPage === 'exam' || subPage === 'exam-done'){this.set('showLogoHeader', false);}
+        if(['exam', 'exam-done'].indexOf(subPage) !== -1){this.set('showLogoHeader', false);}
       }
       else {
         this.page = page;
@@ -144,6 +145,9 @@ class RhApp extends PolymerElement {
         break;
       case 'personal':
         import('./pages/rh-application-list-personal.js');
+        break;
+      case 'before-exam':
+        import('./pages/rh-application-list-before-exam.js');
         break;
       case 'exam':
         import('./pages/rh-application-list-exam.js');

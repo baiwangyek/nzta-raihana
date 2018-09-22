@@ -14,13 +14,14 @@ export default class RhInput extends PolymerElement {
           border-bottom: 1px solid black;
           padding: 5px 0;
           background: none;
+          outline: none;
           @apply --custom-button-styles;
         }
 
-        .input:focus {
+        /* .input:focus {
           outline: none;
           background: white;
-        }
+        } */
 
         .label {
           font-size: 12px;
