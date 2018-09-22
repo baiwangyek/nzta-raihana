@@ -562,7 +562,7 @@ export default class RhEyeTest extends PolymerElement {
       console.log('event.results[last][0]', event.results[last][0])
 
       var num;
-      if (` ${transcript} `.indexOf('up') !== -1) {
+      if (` ${transcript} `.indexOf('up') !== -1 || ` ${transcript} `.indexOf('app') !== -1) {
         num = 1;
       } else if (` ${transcript} `.indexOf('right') !== -1) {
         num = 2;
