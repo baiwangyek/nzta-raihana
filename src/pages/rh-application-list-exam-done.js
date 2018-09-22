@@ -35,6 +35,19 @@ export default class RhApplicationListExamDone extends PolymerElement {
         .header-questions {
           font-size: 12px;
         }
+
+        .success-container {
+          position: absolute;
+          text-align: center;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        .success-score {
+          margin: 10px 0 40px;
+        }
+
       </style>
       <div class="header">
         <p class="header-time" class="h3">12:00 left</p>
@@ -43,9 +56,9 @@ export default class RhApplicationListExamDone extends PolymerElement {
           <p class="header-questions font-weight--bold">0 questions left</p>
         </div>
       </div>
-      <div>
-        <h1 class="h1 font-weight--med">You passed!</h1>
-        <h1 class="h1 font-weight--med">You scored 35 / 35</h1>
+      <div class="success-container">
+        <h1 class="font-weight--med h1">You passed!</h1>
+        <h1 class="h1 font-weight--med success-score">You scored 35 / 35</h1>
         <rh-button label="Next"></rh-button>
       </div>
     `; 
@@ -57,6 +70,10 @@ export default class RhApplicationListExamDone extends PolymerElement {
   static get observers() {
     return [
     ]
+  }
+
+  check(check) {
+    return true;
   }
   connectedCallback() {
     super.connectedCallback();
