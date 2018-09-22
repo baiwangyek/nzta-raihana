@@ -65,7 +65,9 @@ export default class RhApplicationListMedical extends PolymerElement {
             <rh-input class="page-item" type="textarea" label="(Optional) If you don’t have a NIH Number, what disabilities do you have?"></rh-input>
           </template>
           <div class="CTA-container">
-            <rh-button label="Next"></rh-button>
+            <a href="/eyeTest">
+              <rh-button label="Next"></rh-button>
+            </a>
             <rh-button ghost on-click="goBack" label="Back"></rh-button>
           </div>
         </div>
