@@ -248,6 +248,18 @@ export default class RhEyeTest extends PolymerElement {
           </div>
 
 
+          <template is="dom-if" if="{{_isEqualTo(mode, 'setup')}}">
+            <a href="/applicationList/exam" style="color: #b2d3d8">
+              ...
+            </a>
+          </template>
+
+          <template is="dom-if" if="{{_isEqualTo(mode, 'sitting')}}">
+            <a href="/applicationList/exam" style="color: #b2d3d8">
+              ...
+            </a>
+          </template>
+
           <template is="dom-if" if="{{_isEqualTo(mode, 'passed')}}">
             <a href="/applicationList/exam">
               <rh-button data-id="123" data-step$=[[item.step]] label="Next"></rh-button>
@@ -279,7 +291,7 @@ export default class RhEyeTest extends PolymerElement {
 
                 <template is="dom-if" if=[[showTheRightScreen]]>
                   
-                  <div class="h3" style="text-align: center">
+                  <div class="h3" style="text-align: center; height: 30px">
                     &nbsp;
                     <template is="dom-if" if="{{moreThan5BadFramaesForLast3Seconds(badFramaesForLast3Seconds)}}">
                       <span>Stop cheating, step back 😠</span>
@@ -290,17 +302,17 @@ export default class RhEyeTest extends PolymerElement {
                     <table class="eye-test__table">
                       <tr>
                         <td></td>
-                        <td class="h3">up</td>
+                        <td class="h3">brown</td>
                         <td></td>
                       </tr>
                       <tr>
-                        <td class="h3">left</td>
+                        <td class="h3">yellow</td>
                         <td><div class$="[[eCharacterClass]]">E</div></td>
-                        <td class="h3">right</td>
+                        <td class="h3">orange</td>
                       </tr>
                       <tr>
                         <td></td>
-                        <td class="h3">down</td>
+                        <td class="h3">gold</td>
                         <td></td>
                       </tr>
                     </table>
@@ -340,8 +352,8 @@ export default class RhEyeTest extends PolymerElement {
       },
       mode: { // [setup, sitting]
         type: String,
-        // value: 'setup',
-        value: 'sitting',
+        value: 'setup',
+        // value: 'sitting',
       },
       successfulAttempts: {
         type: Number,
@@ -537,7 +549,7 @@ export default class RhEyeTest extends PolymerElement {
 
   newRecognition() {
     console.log('starting speach recogniton...')
-    const grammar = '#JSGF V1.0; grammar numbers; public <number> = up | right | down | left ;'
+    const grammar = '#JSGF V1.0; grammar numbers; public <number> = brown | orange | gold | yellow ;'
     this.recognition = new SpeechRecognition();
     const speechRecognitionList = new SpeechGrammarList();
     speechRecognitionList.addFromString(grammar,  Number.MAX_SAFE_INTEGER);
@@ -545,7 +557,7 @@ export default class RhEyeTest extends PolymerElement {
     this.recognition.continuous = true;
     this.recognition.continuos = true;
     this.recognition.interimResults = true;
-    this.recognition.lang = "en-US";
+    this.recognition.lang = "en-AU";
     this.recognition.maxAlternatives = 1;
     this.recognition.start();
     this.recognition.onspeechend = () => {
@@ -562,13 +574,13 @@ export default class RhEyeTest extends PolymerElement {
       console.log('event.results[last][0]', event.results[last][0])
 
       var num;
-      if (` ${transcript} `.indexOf('up') !== -1 || ` ${transcript} `.indexOf('app') !== -1) {
+      if (` ${transcript} `.toLowerCase().indexOf('brown') !== -1) {
         num = 1;
-      } else if (` ${transcript} `.indexOf('right') !== -1) {
+      } else if (` ${transcript} `.toLowerCase().indexOf('orange') !== -1)  {
         num = 2;
-      } else if (` ${transcript} `.indexOf('down') !== -1 || ` ${transcript} `.indexOf("don't") !== -1) {
+      } else if (` ${transcript} `.toLowerCase().indexOf('gold') !== -1 ) {
         num = 3;
-      } else if (` ${transcript} `.indexOf('left') !== -1 || ` ${transcript} `.indexOf('let') !== -1) {
+      } else if (` ${transcript} `.toLowerCase().indexOf('yellow') !== -1 ) {
         num = 4;
       } else {
         num = -1;
@@ -625,8 +637,8 @@ export default class RhEyeTest extends PolymerElement {
   }
 
   checkCompletion() {
-    if (this.overallAttempts >= 4) {
-      if (this.successfulAttempts >= 2) {
+    if (this.overallAttempts >= 5) {
+      if (this.successfulAttempts >= 4) {
         this.set('mode', 'passed')
       } else {
         this.set('mode', 'failed')
