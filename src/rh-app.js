@@ -69,6 +69,7 @@ class RhApp extends PolymerElement {
         <rh-application-list-medical name="medical"></rh-application-list-medical>
         <rh-application-list-personal name="personal"></rh-application-list-personal>
         <rh-application-list-exam name="exam"></rh-application-list-exam>
+        <rh-application-list-exam-done name="exam-done"></rh-application-list-exam-done>
       </iron-pages>
     `;
   }
@@ -107,7 +108,7 @@ class RhApp extends PolymerElement {
     else if(page==='applicationList') {
       if(subPage){
         this.page = subPage;
-        if(subPage === 'exam'){this.set('showLogoHeader', false);}
+        if(subPage === 'exam' || subPage === 'exam-done'){this.set('showLogoHeader', false);}
       }
       else {
         this.page = page
@@ -143,6 +144,10 @@ class RhApp extends PolymerElement {
         break;
       case 'exam':
         import('./pages/rh-application-list-exam.js');
+        break;
+      case 'exam-done':
+        console.log(123);
+        import('./pages/rh-application-list-exam-done.js');
         break;
       case 'view404':
         import('./my-view404.js');

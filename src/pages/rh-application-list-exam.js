@@ -12,6 +12,7 @@ export default class RhApplicationListExam extends PolymerElement {
           display: flex;
           padding: 20px 40px;
           justify-content: space-between;
+          align-items: center;
         }
 
         .header-time {
