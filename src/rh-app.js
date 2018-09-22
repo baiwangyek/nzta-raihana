@@ -42,11 +42,10 @@ class RhApp extends PolymerElement {
         }
 
         .raihana {
-          font-weight: 600;
           color: black;
-          font-family: 'Montserrat Alternates', sans-serif;
           text-decoration: none;
           font-size: 18px;
+          font-family: Objectivity-Bold;
         }
       </style>
 

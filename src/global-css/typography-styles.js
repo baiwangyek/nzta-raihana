@@ -9,9 +9,14 @@ export const typographyStyles = html`
     700 - bold
     */
 
+    /* @font-face {
+      font-family: 'MyWebFont';
+      src: url('../Objectivity/Objectivity-Regular.woff2') format('woff2');
+    } */
+
+
     * {
-      font-family: 'Montserrat Alternates', sans-serif;
-      /* keep fonts similar weight for different browsers */
+      font-family: 'Objectivity-Regular', sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -53,12 +58,13 @@ export const typographyStyles = html`
     }
 
     .font-weight--med {
-      font-weight: 600
+      /* font-weight: 600 */
+      font-family: 'Objectivity-Medium', sans-serif; 
     }
 
     .font-weight--bold {
-      font-weight: 700;
-      /* font-family: 'ObjectivityBold', sans-serif;  */
+      /* font-weight: 700; */
+      font-family: 'Objectivity-Bold', sans-serif; 
     }
 
     .color--primary {

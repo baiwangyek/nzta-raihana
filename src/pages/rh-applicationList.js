@@ -48,7 +48,7 @@ export default class RhApplicationList extends PolymerElement {
       <rh-layout>
         <div slot="content">
           <h3>Hi Lina</h3>
-          <h2 class="h2 font-weight--bold application-list-title title-spacing">There are 3 things left to do to get your license</h2>
+          <h2 style="margin-top: 10px;" class="h2 font-weight--bold application-list-title title-spacing">There are 3 things left to do to get your license</h2>
           <div style="display: flex; justify-content: space-between;">
             <template is="dom-repeat" items="[[applicationList]]">
               <div class="application-list-card">
