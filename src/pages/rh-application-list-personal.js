@@ -68,7 +68,7 @@ export default class RhPersonalListPersonal extends PolymerElement {
           <rh-input class="page-item half-item" type="text" placeholder="021456382" label="Phone number"></rh-input>
           <rh-input class="page-item half-item" type="text" placeholder="Indeterminate" label="Gender"></rh-input>
           <div class="CTA-container">
-            <a href="/applicationList/medical"><rh-button label="Next"></rh-button></a>
+            <a href="/applicationList/medical"><rh-button label="Next" on-click="saveDetails"></rh-button></a>
             <rh-button ghost on-click="goBack" label="Back"></rh-button>
           </div>
         </div>
@@ -94,7 +94,7 @@ export default class RhPersonalListPersonal extends PolymerElement {
     window.history.back();
   }
 
-  goToApplicationStep() {
+  saveDetails() {
     
     var database = firebase.firestore();
     database.collection("user-details").doc("personal_info").set({
