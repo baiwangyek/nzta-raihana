@@ -48,6 +48,7 @@ class RhApp extends PolymerElement {
         <my-view404 name="view404"></my-view404> -->
         <rh-landing name="landing"></rh-landing>
         <rh-application-list name="applicationList"></rh-application-list>
+        <rh-exam name="exam"></rh-exam>
       </iron-pages>
     `;
   }
@@ -77,7 +78,7 @@ class RhApp extends PolymerElement {
      // Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
     if (!page) {
       this.page = 'landing';
-    } else if (['landing', 'applicationList', 'view3'].indexOf(page) !== -1) {
+    } else if (['landing', 'applicationList', 'exam'].indexOf(page) !== -1) {
       this.page = page;
     } else {
       this.page = 'view404';
@@ -95,6 +96,9 @@ class RhApp extends PolymerElement {
         break;
       case 'applicationList':
         import('./pages/rh-applicationList.js');
+        break;
+        case 'exam':
+        import('./pages/rh-exam.js');
         break;
       case 'view404':
         import('./my-view404.js');
