@@ -1,9 +1,13 @@
 import { html } from '@polymer/polymer/polymer-element.js';
+import { resetStyles } from './reset-styles.js';
+import { typographyStyles } from './typography-styles';
+import { elementsStyles } from './elements-styles';
+
 import { colorStyles } from './color.js';
 
 export const globalCSS = html`
-  <link rel="stylesheet" href="./src/global-css/reset.css">
-  <link rel="stylesheet" href="./src/global-css/typography.css">
-  <link rel="stylesheet" href="./src/global-css/elements.css">
+  ${resetStyles}
+  ${typographyStyles}
+  ${elementsStyles}
   ${colorStyles}
 `
