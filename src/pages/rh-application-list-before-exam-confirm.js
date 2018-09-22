@@ -56,23 +56,12 @@ export default class RhApplicationListBeforeExamConfirm extends PolymerElement {
             <p class="copy-item">Date of birth: 28/4/1997 (21 years old)</p>
             <p class="copy-item">Address: 8b Tuatara Street, Orakei, Wellington</p>
             <div class="CTA-container">
-              <a style="display: inline-block; margin-right: 20px;" href="/applicationList/exam"><rh-button label="Confirm"></rh-button></a>
+              <a style="display: inline-block; margin-right: 20px;" href="/applicationList/exam-ready"><rh-button label="Confirm"></rh-button></a>
               <a href="/applicationList/before-exam"><rh-button label="Cancel"></rh-button></a>
             </div>
           </div>
         </div>
       </div>
-      <!-- <div>
-        <h3>You are about to supervise the following person. <br>
-          Does everything match up?
-        </h3>
-        <div>
-          <iron-image></iron-image>
-          <div>
-
-          </div>
-        </div>
-      </div> -->
     `;
   }
   static get properties(){
