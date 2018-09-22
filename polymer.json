@@ -3,7 +3,8 @@
   "shell": "src/rh-app.js",
   "sources": [
     "images/**/*",
-    "opencvjs/**/*"
+    "opencvjs/**/*",
+    "Objectivity/**/*"
   ],
   "extraDependencies": [
     "manifest.json",
