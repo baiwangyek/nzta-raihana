@@ -57,16 +57,18 @@ class RhApp extends PolymerElement {
       <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
       <app-route route="{{subroute}}" pattern="[[rootPath]]:subPage" data="{{subrouteData}}"></app-route>
 
-      <div class="header">
-        <a class="raihana" href="/applicationList">Raihana</a>
-      </div>
+      <template is="dom-if" if=[[showLogoHeader]]>
+        <div class="header">
+          <a class="raihana" href="/applicationList">Raihana</a>
+        </div>
+      </template>
       <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
         <rh-landing name="landing"></rh-landing>
         <rh-application-list name="applicationList"></rh-application-list>
         <rh-eye-test name="eyeTest"></rh-eye-test>
-        <rh-application-list-identity name="identity"></rh-application-list-identity>
         <rh-application-list-medical name="medical"></rh-application-list-medical>
         <rh-application-list-personal name="personal"></rh-application-list-personal>
+        <rh-application-list-exam name="exam"></rh-application-list-exam>
       </iron-pages>
     `;
   }
@@ -80,9 +82,9 @@ class RhApp extends PolymerElement {
       },
       routeData: Object,
       subroute: Object,
-      showGoHome: {
+      showLogoHeader: {
         type: Boolean,
-        value: false
+        value: true
       }
     };
   }
@@ -96,13 +98,7 @@ class RhApp extends PolymerElement {
   _routePageChanged(route) {
     var page = this.route.path.split('/')[1];
     var subPage = this.route.path.split('/')[2];
-    // console.log('page', page);
-    // console.log('subpage', subPage);
-    // Show the corresponding page according to the route.
-    //
-    // If no page was found in the route data, page will be an empty string.
-    // Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
-    this.set('showGoHome', false);
+    this.set('showLogoHeader', true);
 
     if (!page) {
       this.page = 'landing';
@@ -111,7 +107,7 @@ class RhApp extends PolymerElement {
     else if(page==='applicationList') {
       if(subPage){
         this.page = subPage;
-        this.set('showGoHome', true);
+        if(subPage === 'exam'){this.set('showLogoHeader', false);}
       }
       else {
         this.page = page
@@ -144,6 +140,9 @@ class RhApp extends PolymerElement {
         break;
       case 'personal':
         import('./pages/rh-application-list-personal.js');
+        break;
+      case 'exam':
+        import('./pages/rh-application-list-exam.js');
         break;
       case 'view404':
         import('./my-view404.js');
