@@ -22,13 +22,25 @@ export default class RhApplicationListExam extends PolymerElement {
 
         .header-indicator-container {
           flex: 1;
+          position: relative;
         }
 
         .header-indicator {
-          background: black;
+          /* background: black; */
           height: 10px;
           border-radius: 60px;
           margin-bottom: 5px;
+          background: transparent;
+          border: 2px solid black;
+        }
+
+        .header-indicator--doneness {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 1px;
+          /* width: calc(100% / 5 - 1px); */
+          background: black;
         }
 
         .header-questions {
@@ -39,6 +51,7 @@ export default class RhApplicationListExam extends PolymerElement {
           max-width: 600px;
           margin: 0 auto;
           width: 90%;
+          position: relative;
         }
 
         .question-title {
@@ -86,7 +99,7 @@ export default class RhApplicationListExam extends PolymerElement {
 
         .answers-text {
           font-size: 14px;
-        }
+        } 
       </style>
       <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
 
@@ -94,12 +107,13 @@ export default class RhApplicationListExam extends PolymerElement {
         <p class="header-time" class="h3">60:00 left</p>
         <div class="header-indicator-container">
           <div class="header-indicator"></div>
-          <p class="header-questions font-weight--bold">35 questions left</p>
+          <div class="header-indicator header-indicator--doneness"></div>
+          <p class="header-questions font-weight--bold">[[questionsLeft]] questions left</p>
         </div>
       </div>
-      <iron-pages selected="[[examPage]]" attr-for-selected="page">
-        <template is="dom-repeat" items="[1,2,3,4,5]">
-          <div page=[[item]] class="question-container">
+      <iron-pages selected=[[examPage]] attr-for-selected="page">
+        <template is="dom-repeat" items=[[questions]]>
+          <div page$=[[item]] class="question-container">
             <h2 class="question-title h2 font-weight--med">Questions [[item]]</h2>
             <iron-image class="question-image" sizing="cover" preload src="../../images/exam-1.png"></iron-image>
             <p class="question-description" class="h3 font-weight--med">Select the correct answer. You're a good driver if...</p>
@@ -121,9 +135,17 @@ export default class RhApplicationListExam extends PolymerElement {
         type: Array,
         value: ['You ask what’s going on around you', 'You’re totally aware of what\’s going on around you', 'You have no idea what\’s going on around you', 'You’re often aware of what\’s going on around you']
       },
+      questions: {
+        type: Array,
+        value: [1,2,3,4,5]
+      },
       examPage: {
+        type: Number, 
+        value: 1
+      },
+      questionsLeft: {
         type: Number,
-        default: 1
+        value: 29
       }
     }
   }
@@ -139,6 +161,10 @@ export default class RhApplicationListExam extends PolymerElement {
     (this.examPage === 5)?
       this.set('route.path', '/applicationList/exam-done'):
       this.set('examPage', this.examPage+1);
+    
+    this.shadowRoot.querySelector('.header-indicator--doneness').style.width = `calc(1px + 100% / 5 * ${this.examPage-1})`;
+    this.set('questionsLeft', 30 - (this.examPage*5));
+
     // this.set('route.path', '/applicationList/exam-done');
   }
 }

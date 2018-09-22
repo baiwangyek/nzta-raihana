@@ -54,7 +54,7 @@ export default class RhApplicationListExamDone extends PolymerElement {
       <div class="header">
         <p class="header-time" class="h3">12:00 left</p>
         <div class="header-indicator-container">
-          <div class="header-indicator header-indicator--done"></div>
+          <div class="header-indicator"></div>
           <p class="header-questions font-weight--bold">0 questions left</p>
         </div>
       </div>

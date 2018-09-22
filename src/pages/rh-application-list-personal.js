@@ -95,22 +95,22 @@ export default class RhPersonalListPersonal extends PolymerElement {
   }
 
   saveDetails() {    
-    var database = firebase.firestore();
-    database.collection("user-details").doc("personal_info").set({
-      address: this.shadowRoot.querySelector('#address').getValue(),
-      birthplace: this.shadowRoot.querySelector('#birthplace').getValue(),
-      birthday: this.shadowRoot.querySelector('#birthday').getValue(),
-      first_name: this.shadowRoot.querySelector('#fname').getValue(),
-      gender: this.shadowRoot.querySelector('#gender').getValue(),
-      last_name: this.shadowRoot.querySelector('#lname').getValue(),
-      phone_num: this.shadowRoot.querySelector('#phonenum').getValue()
-    })
-    .then(function() {
-        console.log("Document successfully written!");
-    })
-    .catch(function(error) {
-        console.error("Error writing document: ", error);
-    });
+    // var database = firebase.firestore();
+    // database.collection("user-details").doc("personal_info").set({
+    //   address: this.shadowRoot.querySelector('#address').getValue(),
+    //   birthplace: this.shadowRoot.querySelector('#birthplace').getValue(),
+    //   birthday: this.shadowRoot.querySelector('#birthday').getValue(),
+    //   first_name: this.shadowRoot.querySelector('#fname').getValue(),
+    //   gender: this.shadowRoot.querySelector('#gender').getValue(),
+    //   last_name: this.shadowRoot.querySelector('#lname').getValue(),
+    //   phone_num: this.shadowRoot.querySelector('#phonenum').getValue()
+    // })
+    // .then(function() {
+    //     console.log("Document successfully written!");
+    // })
+    // .catch(function(error) {
+    //     console.error("Error writing document: ", error);
+    // });
   }
   
 }

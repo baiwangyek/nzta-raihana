@@ -115,28 +115,28 @@ export default class RhApplicationListMedical extends PolymerElement {
   }
 
   saveAndNext() {
-    console.log(this.shadowRoot.querySelector('#glasses').getValue());
-    if(this.showDisabilityInput) {
-      console.log(this.shadowRoot.querySelector('#nhi').getValue());
-      console.log(this.shadowRoot.querySelector('#disabilities').getValue());
-    }
+    // console.log(this.shadowRoot.querySelector('#glasses').getValue());
+    // if(this.showDisabilityInput) {
+    //   console.log(this.shadowRoot.querySelector('#nhi').getValue());
+    //   console.log(this.shadowRoot.querySelector('#disabilities').getValue());
+    // }
 
-    var database = firebase.firestore();
-    database.collection("user-details").doc("medical_info").set({
-      address: this.shadowRoot.querySelector('#address').getValue(),
-      birthplace: this.shadowRoot.querySelector('#birthplace').getValue(),
-      birthday: this.shadowRoot.querySelector('#birthday').getValue(),
-      first_name: this.shadowRoot.querySelector('#fname').getValue(),
-      gender: this.shadowRoot.querySelector('#gender').getValue(),
-      last_name: this.shadowRoot.querySelector('#lname').getValue(),
-      phone_num: this.shadowRoot.querySelector('#phonenum').getValue()
-    })
-    .then(function() {
-        console.log("Document successfully written!");
-    })
-    .catch(function(error) {
-        console.error("Error writing document: ", error);
-    });
+    // var database = firebase.firestore();
+    // database.collection("user-details").doc("medical_info").set({
+    //   address: this.shadowRoot.querySelector('#address').getValue(),
+    //   birthplace: this.shadowRoot.querySelector('#birthplace').getValue(),
+    //   birthday: this.shadowRoot.querySelector('#birthday').getValue(),
+    //   first_name: this.shadowRoot.querySelector('#fname').getValue(),
+    //   gender: this.shadowRoot.querySelector('#gender').getValue(),
+    //   last_name: this.shadowRoot.querySelector('#lname').getValue(),
+    //   phone_num: this.shadowRoot.querySelector('#phonenum').getValue()
+    // })
+    // .then(function() {
+    //     console.log("Document successfully written!");
+    // })
+    // .catch(function(error) {
+    //     console.error("Error writing document: ", error);
+    // });
 
   }
 }

@@ -53,22 +53,22 @@ export default class RhLanding extends PolymerElement {
 
   login() {
   // Get a reference to the database service
-    var database = firebase.firestore();
-    database.collection("user-details").doc("personal_info").set({
-      address: "test add",
-      birthplace: "Auckland",
-      birthday: Date.now(),
-      first_name: "Jane",
-      gender: "female",
-      last_name: "Doe",
-      phone_num: "+640000000"
-  })
-  .then(function() {
-      console.log("Document successfully written!");
-  })
-  .catch(function(error) {
-      console.error("Error writing document: ", error);
-  });
+  //   var database = firebase.firestore();
+  //   database.collection("user-details").doc("personal_info").set({
+  //     address: "test add",
+  //     birthplace: "Auckland",
+  //     birthday: Date.now(),
+  //     first_name: "Jane",
+  //     gender: "female",
+  //     last_name: "Doe",
+  //     phone_num: "+640000000"
+  // })
+  // .then(function() {
+  //     console.log("Document successfully written!");
+  // })
+  // .catch(function(error) {
+  //     console.error("Error writing document: ", error);
+  // });
    
    this.set('route.path','/applicationList');
   }
