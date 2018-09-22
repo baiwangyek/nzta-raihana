@@ -104,6 +104,7 @@ class RhApp extends PolymerElement {
     if (!page) {
       this.page = 'landing';
     } else if (['landing', 'view3', 'eyeTest'].indexOf(page) !== -1) {
+        this.page = page
     } 
     else if(page==='applicationList') {
       if(subPage){
