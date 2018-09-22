@@ -62,7 +62,7 @@ export default class RhApplicationListIdentity extends PolymerElement {
       </style>
       <rh-two-col-layout>
         <div slot="content-one">
-          <h2 class="h2 font-weight--bold title-spacing">Take a selfie!</h2>
+          <h2 class="h3 font-weight--med application-list-title sub-title-spacing">Take a selfie!</h2>
           <p class="p identity-description">We need a photo of you for your license :-)
           </p>
           <div class="CTA-container">
@@ -79,7 +79,7 @@ export default class RhApplicationListIdentity extends PolymerElement {
             </div>
           </template>
           <a href="/applicationList/personal">
-            <rh-button style="display: block; margin-bottom: 20px; margin-top: 40px;" label="Next"></rh-button>
+            <rh-button style="display: inline-block; margin-right: 20px; margin-top: 40px;" label="Next"></rh-button>
           </a>
           <rh-button ghost on-click="goBack" label="Back"></rh-button>
         </div>
