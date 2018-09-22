@@ -2,6 +2,7 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { globalCSS } from '../global-css/global-css';
 
 import '@polymer/app-route/app-location.js';
+import '@polymer/app-route/app-route.js';
 
 import RhLayout from '../layout/rh-layout.js';
 import RhButton from '../elements/rh-button.js';
@@ -26,16 +27,20 @@ export default class RhApplicationList extends PolymerElement {
         }
       </style>
       <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
+      <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+      <app-route route="{{subroute}}" pattern="[[rootPath]]:applicationListStep" data="{{subrouteData}}"></app-route>
+
       <rh-layout>
         <div slot="content">
           <h2 class="h2 font-weight--bold application-list-title title-spacing">If you want your license be an awesome person and do these things</h2>
           <template is="dom-repeat" items="[[applicationList]]">
             <div class="application-list-card">
               <p class="p">[[item.label]]</p>
-              <rh-button data-id="123" data-step$=[[item.step]] label="Start" on-click="goToApplicationStep"></rh-button>
+              <rh-button data-step$=[[item.step]] label="Start" on-click="goToApplicationStep"></rh-button>
             </div>
           </template>
         </div>
+        <input id="input">
       </rh-layout>
     `;
   }
@@ -49,7 +54,9 @@ export default class RhApplicationList extends PolymerElement {
           {label: 'Health checkup', step:'health'},
           {label: 'Start the exam', step:'exam'}
         ]
-      }
+      },
+      routeData: Object,
+      subroute: Object
     }
   }
   static get observers() {
@@ -58,11 +65,12 @@ export default class RhApplicationList extends PolymerElement {
   }
   connectedCallback() {
     super.connectedCallback();
+    
   }
 
   goToApplicationStep(e) {
     var applicationStep = e.currentTarget.dataset.step;
-    console.log(applicationStep);
+    this.set('subroute.path', applicationStep);
   }
 }
 window.customElements.define('rh-application-list', RhApplicationList);

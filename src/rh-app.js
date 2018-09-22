@@ -16,6 +16,7 @@ import '@polymer/iron-pages/iron-pages.js';
 import '@polymer/iron-selector/iron-selector.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import './my-icons.js';
+import RhButton from './elements/rh-button.js';
 
 // Gesture events like tap and track generated from touch will not be
 // preventable, allowing for better scrolling performance.
@@ -35,19 +36,28 @@ class RhApp extends PolymerElement {
 
           display: block;
         }
+
+        .header {
+          padding: 20px;
+          position: fixed;
+          top: 0;
+          left: 0;
+        }
       </style>
 
       <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
-
       <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+      <app-route route="{{subroute}}" pattern="[[rootPath]]:subPage" data="{{subrouteData}}"></app-route>
 
+      <template is="dom-if" if=[[showGoHome]]>
+        <div class="header">
+          <rh-button label="Go home" on-click="goHome"></rh-button>
+        </div>
+      </template>
       <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
-        <!-- <my-view1 name="view1"></my-view1>
-        <my-view2 name="view2"></my-view2>
-        <my-view3 name="view3"></my-view3>
-        <my-view404 name="view404"></my-view404> -->
         <rh-landing name="landing"></rh-landing>
         <rh-application-list name="applicationList"></rh-application-list>
+        <rh-application-list-identity name="identity"></rh-application-list-identity>
       </iron-pages>
     `;
   }
@@ -60,26 +70,45 @@ class RhApp extends PolymerElement {
         observer: '_pageChanged'
       },
       routeData: Object,
-      subroute: Object
+      subroute: Object,
+      showGoHome: {
+        type: Boolean,
+        value: false
+      }
     };
   }
 
   static get observers() {
     return [
-      '_routePageChanged(routeData.page)'
+      '_routePageChanged(route.path)',
     ];
   }
 
-  _routePageChanged(page) {
-     // Show the corresponding page according to the route.
-     //
-     // If no page was found in the route data, page will be an empty string.
-     // Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
+  _routePageChanged(route) {
+    var page = this.routeData.page;
+    var subPage = this.subrouteData.subPage;
+    // Show the corresponding page according to the route.
+    //
+    // If no page was found in the route data, page will be an empty string.
+    // Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
+    this.set('showGoHome', false);
+
     if (!page) {
       this.page = 'landing';
-    } else if (['landing', 'applicationList', 'view3'].indexOf(page) !== -1) {
+    } 
+    else if (['landing', 'view3'].indexOf(page) !== -1) {
       this.page = page;
-    } else {
+    } 
+    else if(page==='applicationList') {
+      if(subPage){
+        this.page = subPage;
+        this.set('showGoHome', true);
+      }
+      else {
+        this.page = page
+      }
+    }
+    else {
       this.page = 'view404';
     }
   }
@@ -96,10 +125,18 @@ class RhApp extends PolymerElement {
       case 'applicationList':
         import('./pages/rh-applicationList.js');
         break;
+      case 'identity':
+        import('./pages/rh-application-list-identity.js');
+        break;
       case 'view404':
         import('./my-view404.js');
         break;
     }
+  }
+
+  goHome() {
+    this.set('subrouteData.subPage', '');
+    this.set('route.path', '/applicationList');
   }
 }
 
