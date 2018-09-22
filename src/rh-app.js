@@ -63,14 +63,13 @@ class RhApp extends PolymerElement {
       <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
         <rh-landing name="landing"></rh-landing>
         <rh-application-list name="applicationList"></rh-application-list>
-<<<<<<< HEAD
         <rh-exam name="exam"></rh-exam>
-=======
         <rh-eye-test name="eyeTest"></rh-eye-test>
         <rh-application-list-identity name="identity"></rh-application-list-identity>
         <rh-application-list-medical name="medical"></rh-application-list-medical>
         <rh-application-list-personal name="personal"></rh-application-list-personal>
->>>>>>> 1c3f90ea2f8f9913677cf556acc53c28087abbb2
+
+        <rh-exam name="exam"></rh-exam>
       </iron-pages>
     `;
   }
@@ -110,13 +109,9 @@ class RhApp extends PolymerElement {
 
     if (!page) {
       this.page = 'landing';
-<<<<<<< HEAD
-    } else if (['landing', 'applicationList', 'exam'].indexOf(page) !== -1) {
+    } else if (['landing', 'applicationList', 'exam', 'eyeTest'].indexOf(page) !== -1) {
       this.page = page;
-    } else {
-=======
-    } else if (['landing', 'view3', 'eyeTest'].indexOf(page) !== -1) {
-    } 
+    }  
     else if(page==='applicationList') {
       if(subPage){
         this.page = subPage;
@@ -127,7 +122,6 @@ class RhApp extends PolymerElement {
       }
     }
     else {
->>>>>>> 1c3f90ea2f8f9913677cf556acc53c28087abbb2
       this.page = 'view404';
     }
   }
@@ -144,10 +138,8 @@ class RhApp extends PolymerElement {
       case 'applicationList':
         import('./pages/rh-applicationList.js');
         break;
-<<<<<<< HEAD
         case 'exam':
         import('./pages/rh-exam.js');
-=======
       case 'eyeTest':
         import('./pages/rh-eyeTest.js');
       case 'identity':
@@ -158,7 +150,8 @@ class RhApp extends PolymerElement {
         break;
       case 'personal':
         import('./pages/rh-application-list-personal.js');
->>>>>>> 1c3f90ea2f8f9913677cf556acc53c28087abbb2
+        case 'exam':
+        import('./pages/rh-exam.js');
         break;
       case 'view404':
         import('./my-view404.js');

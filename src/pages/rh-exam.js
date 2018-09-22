@@ -17,6 +17,8 @@ export default class RhExam extends PolymerElement {
       .header{
         background-color: #cecece;
         height:70px;
+     
+           
         }
 
         .timer{
@@ -38,6 +40,8 @@ export default class RhExam extends PolymerElement {
             border: 1px solid black;
         }
 
+           
+        
         .image{
             width:100%;
             border-radius: 10%;
@@ -51,7 +55,9 @@ export default class RhExam extends PolymerElement {
          
            
             font-size:30px;
-        
+        }
+        label{
+            size:50px;
         }
        
       }
