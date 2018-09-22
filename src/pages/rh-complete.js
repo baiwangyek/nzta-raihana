@@ -11,6 +11,7 @@ export default class RhComplete extends PolymerElement {
         .complete-card-container {
           background: white;
           max-width: 610px;
+          width: 90%;
           margin: 0 auto;
           margin-top: 90px;
           height: calc(100vh - 90px);

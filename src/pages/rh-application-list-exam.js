@@ -69,8 +69,8 @@ export default class RhApplicationListExam extends PolymerElement {
           border-radius: 10px;
           padding: 25px;
           line-height: 1.8;
-          box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.15), 0 1px 2px 0 rgba(0,0,0,0.2);
-          transition: 0.4s;
+          box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+          transition: 0.3s;
           cursor: pointer;
         }
 
