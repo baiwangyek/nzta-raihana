@@ -67,6 +67,7 @@ class RhApp extends PolymerElement {
         <rh-application-list name="applicationList"></rh-application-list>
         <rh-eye-test name="eyeTest"></rh-eye-test>
         <rh-application-list-medical name="medical"></rh-application-list-medical>
+        <rh-application-list-identity name="identity"></rh-application-list-identity>
         <rh-application-list-personal name="personal"></rh-application-list-personal>
         <rh-application-list-before-exam name="before-exam"></rh-application-list-before-exam>
         <rh-realme name="realme"></rh-realme>

@@ -279,10 +279,10 @@ export default class RhEyeTest extends PolymerElement {
 
                 <template is="dom-if" if=[[showTheRightScreen]]>
                   
-                  <div class="h2" style="text-align: center">
+                  <div class="h3" style="text-align: center">
                     &nbsp;
                     <template is="dom-if" if="{{moreThan5BadFramaesForLast3Seconds(badFramaesForLast3Seconds)}}">
-                      <span>Stop cheating 😠</span>
+                      <span>Stop cheating, step back 😠</span>
                     </template>
                   </div>
                   <div style="display: none" class="eye-test__positionmeter">Positionmeter</div>
