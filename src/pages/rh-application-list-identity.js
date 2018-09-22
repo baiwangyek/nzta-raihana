@@ -72,7 +72,7 @@ export default class RhApplicationListIdentity extends PolymerElement {
           <template is="dom-if" if=[[uploadFile]]>
             <div>
               <div class="passport-container" style="">
-                <img class="passport-img" src="../../images/photo.png">
+                <img class="passport-img" src="../../images/profile.png">
                 <p class="passport-name">photo.jpg</p>
                 <iron-icon icon="icons:clear"></iron-icon>
               </div>
