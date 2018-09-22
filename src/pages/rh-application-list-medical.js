@@ -59,10 +59,10 @@ export default class RhApplicationListMedical extends PolymerElement {
           <h2 class="h3 font-weight--med application-list-title sub-title-spacing">Health checkup</h2>
           <p>We need a few details about your health to continue</p>
           <rh-input id="glasses" class="page-item half-item"  label="Do you wear glasses or contacts?" type="dropdown"></rh-input>
-          <rh-input id="haveDisability" class="page-item half-item" label="Do you have any disabilities" type="dropdown" on-dropdown-change="showHideDisabilityInput"></rh-input>
+          <rh-input id="haveDisability" class="page-item half-item" label="Do you have any disabilities or illnesses" type="dropdown" on-dropdown-change="showHideDisabilityInput"></rh-input>
           <template is="dom-if" if=[[showDisabilityInput]]>
-            <rh-input id="nhi" class="page-item" type="number" label="What your NIH Number?"></rh-input> 
-            <rh-input id="disabilities" class="page-item" type="textarea" label="(Optional) If you don’t have a NIH Number, what disabilities do you have?"></rh-input>
+            <rh-input id="nhi" class="page-item" type="number" label="What your NHI Number?"></rh-input> 
+            <rh-input id="disabilities" class="page-item" type="textarea" label="(Optional) If you don’t have a NHI Number, what disabilities do you have?"></rh-input>
           </template>
           <div class="CTA-container">
             <a href="/eyeTest">
