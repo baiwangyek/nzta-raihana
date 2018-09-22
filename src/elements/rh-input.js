@@ -54,7 +54,7 @@ export default class RhInput extends PolymerElement {
               <option selected>No</option>
             </select>
           </div>
-          <iron-autogrow-textarea class="textarea" input-type="textarea"></iron-autogrow-textarea>
+          <iron-autogrow-textarea id="textarea" class="textarea" input-type="textarea"></iron-autogrow-textarea>
           <input input-type="default" type="[[type]]" placeholder=[[placeholder]] class="input"/>
         </iron-pages>
       </div>
@@ -97,7 +97,16 @@ export default class RhInput extends PolymerElement {
   }
 
   getValue() {
-    return this.shadowRoot.querySelector("input").value;
+    if(this.type === 'dropdown'){
+      var selectedIndex = this.shadowRoot.querySelector('select').selectedIndex;
+      return (selectedIndex)?'Yes':'No';
+    }
+    else if(this.type === 'textarea'){
+      return this.shadowRoot.querySelector("#textarea").value;
+    }
+    else {
+      return this.shadowRoot.querySelector("input").value;
+    }
   }
 }
 window.customElements.define('rh-input', RhInput);

@@ -58,14 +58,16 @@ export default class RhApplicationListMedical extends PolymerElement {
         <div slot="content-one">
           <h2 class="h3 font-weight--med application-list-title sub-title-spacing">Health checkup</h2>
           <p>We need a few details about your health to continue</p>
-          <rh-input class="page-item half-item"  label="Do you wear glasses or contacts?" type="dropdown"></rh-input>
-          <rh-input class="page-item half-item" label="Do you have any disabilities" type="dropdown" on-dropdown-change="showHideDisabilityInput"></rh-input>
+          <rh-input id="glasses" class="page-item half-item"  label="Do you wear glasses or contacts?" type="dropdown"></rh-input>
+          <rh-input id="haveDisability" class="page-item half-item" label="Do you have any disabilities" type="dropdown" on-dropdown-change="showHideDisabilityInput"></rh-input>
           <template is="dom-if" if=[[showDisabilityInput]]>
-            <rh-input class="page-item" type="number" label="What your NIH Number?"></rh-input> 
-            <rh-input class="page-item" type="textarea" label="(Optional) If you don’t have a NIH Number, what disabilities do you have?"></rh-input>
+            <rh-input id="nhi" class="page-item" type="number" label="What your NIH Number?"></rh-input> 
+            <rh-input id="disabilities" class="page-item" type="textarea" label="(Optional) If you don’t have a NIH Number, what disabilities do you have?"></rh-input>
           </template>
           <div class="CTA-container">
-            <rh-button label="Next"></rh-button>
+            <a href="/eyeTest">
+              <rh-button label="Next" on-click="saveAndNext"></rh-button>
+            </a>
             <rh-button ghost on-click="goBack" label="Back"></rh-button>
           </div>
         </div>
@@ -110,6 +112,15 @@ export default class RhApplicationListMedical extends PolymerElement {
     else if(e.detail.selectedIndex === '1') {
       this.set('showDisabilityInput', false);
     }
+  }
+
+  saveAndNext() {
+    console.log(this.shadowRoot.querySelector('#glasses').getValue());
+    if(this.showDisabilityInput) {
+      console.log(this.shadowRoot.querySelector('#nhi').getValue());
+      console.log(this.shadowRoot.querySelector('#disabilities').getValue());
+    }
+
   }
 }
 window.customElements.define('rh-application-list-medical', RhApplicationListMedical);

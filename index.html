@@ -113,7 +113,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin: 0;
         /* font-family: "Roboto", "Noto", sans-serif; */
         /* line-height: 1.5; */
-        min-height: 100vh;
+        /* min-height: 100vh; */
         background-color: #e0f7fa;
       }
     </style>
@@ -124,5 +124,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       Please enable JavaScript to view this website.
     </noscript>
     <!-- Built with love using Polymer Starter Kit -->
+
+    <!-- <script src="/opencvjs/stats.min.js"></script> -->
+    <script src="/opencvjs/utils.js"></script>
+    <script>
+      var featuresReady = checkFeatures(document.getElementById("info"), { webrtc: true, wasm: true });
+    </script>
+    <!-- <script src="/opencvjs/index.js"></script> -->
+    <script>
+      var Module = {
+        wasmBinaryFile: '/opencvjs/opencv_js.wasm',
+        preRun: [function() {
+          Module.FS_createPreloadedFile('/', 'haarcascade_frontalface_default.xml', '/opencvjs/haarcascade_frontalface_default.xml', true, false);
+        }],
+        _main: function() {
+          // opencvIsReady();
+        }
+      };
+    </script>
+    <script async src="/opencvjs/opencv.js"></script>
+
   </body>
 </html>
