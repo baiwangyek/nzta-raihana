@@ -1,7 +1,7 @@
 {
-  "name": "My App",
-  "short_name": "My App",
-  "description": "My App description",
+  "name": "Raihana",
+  "short_name": "Raihana",
+  "description": "Online learner license test",
   "icons": [
     {
       "src": "images/manifest/icon-192x192.png",

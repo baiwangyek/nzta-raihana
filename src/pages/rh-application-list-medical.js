@@ -45,9 +45,9 @@ export default class RhApplicationListMedical extends PolymerElement {
           margin-top: 60px;
         }
 
-        .CTA-container > rh-button {
+        .CTA-container > a {
           display: inline-block; 
-          margin-right: 40px;
+          margin-right: 30px;
         }
 
         .CTA-container > rh-button:last-of-type {

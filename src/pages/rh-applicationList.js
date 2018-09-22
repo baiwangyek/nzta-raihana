@@ -71,7 +71,7 @@ export default class RhApplicationList extends PolymerElement {
         value: [
           {title: 'Tell us about yourself', description:'Enter some personal details to get started',image: '../../images/application-list-one.png', step:'personal'},
           {title: 'Do a medical check', description: 'We need some info about your health', image: '../../images/application-list-two.png', step:'medical'},
-          {title: 'Start the exam', description: 'Finish everything before starting this', image: '../../images/application-list-three.png', step:'exam'}
+          {title: 'Start the exam', description: 'Finish everything before starting this', image: '../../images/application-list-three.png', step:'before-exam'}
         ]
       },
       routeData: Object,
