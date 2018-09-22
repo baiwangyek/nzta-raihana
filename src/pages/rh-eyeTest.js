@@ -277,8 +277,8 @@ export default class RhEyeTest extends PolymerElement {
             <template is="dom-if" if="{{_isEqualTo(mode, 'sitting')}}">
 
               <template is="dom-if" if=[[showTheRightScreen]]>
-                <progress max="5" value="[[badFramaesForLast3Seconds]]"></progress>
-                <div class="eye-test__positionmeter">Positionmeter</div>
+                <progress style="display: none" max="5" value="[[badFramaesForLast3Seconds]]"></progress>
+                <div style="display: none" class="eye-test__positionmeter">Positionmeter</div>
                 <div class="eye-test__exam">
                   <table class="eye-test__table">
                     <tr>
@@ -329,8 +329,8 @@ export default class RhEyeTest extends PolymerElement {
       },
       mode: { // [setup, sitting]
         type: String,
-        // value: 'setup',
-        value: 'sitting',
+        value: 'setup',
+        // value: 'sitting',
       },
       successfulAttempts: {
         type: Number,
