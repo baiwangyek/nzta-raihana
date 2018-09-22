@@ -11,22 +11,18 @@ export default class RhApplicationList extends PolymerElement {
     return html`
       ${globalCSS}
       <style>
-        .application-list-title {
-          /* text-align: center; */
-        }
-
         .application-list-card {
           padding: 30px 20px;
           background: white;
           border-radius: 12px;
           box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.15), 0 1px 2px 0 rgba(0,0,0,0.2);
+          box-shadow: 2px 2px 24px 0 rgba(141,141,141,0.5);
           margin-right: 20px;
           text-align: center;
           max-width: 350px;
           transition: 0.4s;
           display: flex;
           flex-direction: column;
-          box-shadow: 2px 2px 24px 0 rgba(141,141,141,0.5);
 
         }
 
