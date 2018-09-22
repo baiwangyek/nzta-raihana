@@ -57,18 +57,18 @@ export default class RhPersonalListPersonal extends PolymerElement {
           <h2 class="h3 font-weight--med application-list-title sub-title-spacing">Personal Details</h2>
           <p>We need to get to know you before you get your license :) <br> Enter a few details below:</p>
           <div class="two-col-container page-item">
-            <rh-input type="text" placeholder="First name here" label="First name"></rh-input>
-            <rh-input type="text" placeholder="Last name here" label="Last name"></rh-input>
+            <rh-input id="fname" type="text" placeholder="First name here" label="First name"></rh-input>
+            <rh-input id="lname" type="text" placeholder="Last name here" label="Last name"></rh-input>
           </div>
           <div class="two-col-container page-item">
-            <rh-input type="text" placeholder="12 June 1999" label="Birthday"></rh-input>
-            <rh-input type="text" placeholder="Auckland" label="Where were you born?"></rh-input>
+            <rh-input id="birthday" type="text" placeholder="12 June 1999" label="Birthday"></rh-input>
+            <rh-input id="birthplace" type="text" placeholder="Auckland" label="Where were you born?"></rh-input>
           </div>
-          <rh-input class="page-item" type="text" placeholder="105 Cook Street" label="Home address"></rh-input>
-          <rh-input class="page-item half-item" type="text" placeholder="021456382" label="Phone number"></rh-input>
-          <rh-input class="page-item half-item" type="text" placeholder="Indeterminate" label="Gender"></rh-input>
+          <rh-input id="address" class="page-item" type="text" placeholder="105 Cook Street" label="Home address"></rh-input>
+          <rh-input id="phonenum" class="page-item half-item" type="text" placeholder="021456382" label="Phone number"></rh-input>
+          <rh-input id="gender" class="page-item half-item" type="text" placeholder="Indeterminate" label="Gender"></rh-input>
           <div class="CTA-container">
-            <a href="/applicationList/medical"><rh-button label="Next"></rh-button></a>
+            <a href="/applicationList/medical"><rh-button label="Next" on-click="saveDetails"></rh-button></a>
             <rh-button ghost on-click="goBack" label="Back"></rh-button>
           </div>
         </div>
@@ -93,5 +93,25 @@ export default class RhPersonalListPersonal extends PolymerElement {
   goBack() {
     window.history.back();
   }
+
+  saveDetails() {    
+    var database = firebase.firestore();
+    database.collection("user-details").doc("personal_info").set({
+      address: this.shadowRoot.querySelector('#address').getValue(),
+      birthplace: this.shadowRoot.querySelector('#birthplace').getValue(),
+      birthday: this.shadowRoot.querySelector('#birthday').getValue(),
+      first_name: this.shadowRoot.querySelector('#fname').getValue(),
+      gender: this.shadowRoot.querySelector('#gender').getValue(),
+      last_name: this.shadowRoot.querySelector('#lname').getValue(),
+      phone_num: this.shadowRoot.querySelector('#phonenum').getValue()
+    })
+    .then(function() {
+        console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    });
+  }
+  
 }
 window.customElements.define('rh-application-list-personal', RhPersonalListPersonal);
