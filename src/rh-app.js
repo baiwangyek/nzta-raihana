@@ -16,6 +16,7 @@ import '@polymer/iron-pages/iron-pages.js';
 import '@polymer/iron-selector/iron-selector.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import './my-icons.js';
+import RhButton from './elements/rh-button.js';
 
 // Gesture events like tap and track generated from touch will not be
 // preventable, allowing for better scrolling performance.
@@ -35,20 +36,41 @@ class RhApp extends PolymerElement {
 
           display: block;
         }
+
+        .header {
+          padding: 20px;
+          position: fixed;
+          top: 0;
+          left: 0;
+        }
+
+        .raihana {
+          font-weight: 600;
+          color: black;
+          font-family: 'Montserrat Alternates', sans-serif;
+          text-decoration: none;
+          font-size: 18px;
+        }
       </style>
 
       <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
-
       <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+      <app-route route="{{subroute}}" pattern="[[rootPath]]:subPage" data="{{subrouteData}}"></app-route>
 
+      <div class="header">
+        <a class="raihana" href="/applicationList">Raihana</a>
+      </div>
       <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
-        <!-- <my-view1 name="view1"></my-view1>
-        <my-view2 name="view2"></my-view2>
-        <my-view3 name="view3"></my-view3>
-        <my-view404 name="view404"></my-view404> -->
         <rh-landing name="landing"></rh-landing>
         <rh-application-list name="applicationList"></rh-application-list>
+<<<<<<< HEAD
         <rh-exam name="exam"></rh-exam>
+=======
+        <rh-eye-test name="eyeTest"></rh-eye-test>
+        <rh-application-list-identity name="identity"></rh-application-list-identity>
+        <rh-application-list-medical name="medical"></rh-application-list-medical>
+        <rh-application-list-personal name="personal"></rh-application-list-personal>
+>>>>>>> 1c3f90ea2f8f9913677cf556acc53c28087abbb2
       </iron-pages>
     `;
   }
@@ -61,26 +83,51 @@ class RhApp extends PolymerElement {
         observer: '_pageChanged'
       },
       routeData: Object,
-      subroute: Object
+      subroute: Object,
+      showGoHome: {
+        type: Boolean,
+        value: false
+      }
     };
   }
 
   static get observers() {
     return [
-      '_routePageChanged(routeData.page)'
+      '_routePageChanged(route.path, routeData.page ,subrouteData.subPage)',
     ];
   }
 
-  _routePageChanged(page) {
-     // Show the corresponding page according to the route.
-     //
-     // If no page was found in the route data, page will be an empty string.
-     // Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
+  _routePageChanged(route) {
+    var page = this.route.path.split('/')[1];
+    var subPage = this.route.path.split('/')[2];
+    // console.log('page', page);
+    // console.log('subpage', subPage);
+    // Show the corresponding page according to the route.
+    //
+    // If no page was found in the route data, page will be an empty string.
+    // Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
+    this.set('showGoHome', false);
+
     if (!page) {
       this.page = 'landing';
+<<<<<<< HEAD
     } else if (['landing', 'applicationList', 'exam'].indexOf(page) !== -1) {
       this.page = page;
     } else {
+=======
+    } else if (['landing', 'view3', 'eyeTest'].indexOf(page) !== -1) {
+    } 
+    else if(page==='applicationList') {
+      if(subPage){
+        this.page = subPage;
+        this.set('showGoHome', true);
+      }
+      else {
+        this.page = page
+      }
+    }
+    else {
+>>>>>>> 1c3f90ea2f8f9913677cf556acc53c28087abbb2
       this.page = 'view404';
     }
   }
@@ -97,13 +144,30 @@ class RhApp extends PolymerElement {
       case 'applicationList':
         import('./pages/rh-applicationList.js');
         break;
+<<<<<<< HEAD
         case 'exam':
         import('./pages/rh-exam.js');
+=======
+      case 'eyeTest':
+        import('./pages/rh-eyeTest.js');
+      case 'identity':
+        import('./pages/rh-application-list-identity.js');
+        break;
+      case 'medical':
+        import('./pages/rh-application-list-medical.js');
+        break;
+      case 'personal':
+        import('./pages/rh-application-list-personal.js');
+>>>>>>> 1c3f90ea2f8f9913677cf556acc53c28087abbb2
         break;
       case 'view404':
         import('./my-view404.js');
         break;
     }
+  }
+
+  goHome() {
+    this.set('route.path', '/applicationList');
   }
 }
 

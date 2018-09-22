@@ -15,8 +15,11 @@
   "dependencies": {
     "@polymer/app-layout": "^3.0.0-pre.15",
     "@polymer/app-route": "^3.0.0-pre.15",
+    "@polymer/iron-autogrow-textarea": "^3.0.1",
     "@polymer/iron-flex-layout": "^3.0.0-pre.15",
+    "@polymer/iron-icons": "^3.0.1",
     "@polymer/iron-iconset-svg": "^3.0.0-pre.15",
+    "@polymer/iron-image": "^3.0.1",
     "@polymer/iron-media-query": "^3.0.0-pre.15",
     "@polymer/iron-pages": "^3.0.0-pre.15",
     "@polymer/iron-selector": "^3.0.0-pre.15",

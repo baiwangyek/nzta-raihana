@@ -17,8 +17,6 @@ export default class RhExam extends PolymerElement {
       .header{
         background-color: #cecece;
         height:70px;
-     
-           
         }
 
         .timer{
@@ -38,15 +36,22 @@ export default class RhExam extends PolymerElement {
             width: 700px;
             background-color: white;
             border: 1px solid black;
-           
         }
+
         .image{
             width:100%;
             border-radius: 10%;
         }
        
-        label{
-            size:50px;
+        
+
+        .square1{ 
+           
+           
+         
+           
+            font-size:30px;
+        
         }
        
       }
@@ -72,12 +77,14 @@ export default class RhExam extends PolymerElement {
               <image src="https://www.drivingtests.co.nz/media/question-images/q194b.jpg" class = "image"></image>
               <br>
               <br>
-              <label>
+              
+              <label class="square1">
               <input type="checkbox" checked="checked">
               Yes
               </label>
               <br>
-              <label>
+              <br>
+              <label class ="square1">
               <input type="checkbox">
               No
               </label>
