@@ -67,8 +67,10 @@ class RhApp extends PolymerElement {
         <rh-application-list name="applicationList"></rh-application-list>
         <rh-eye-test name="eyeTest"></rh-eye-test>
         <rh-application-list-medical name="medical"></rh-application-list-medical>
+        <rh-application-list-identity name="identity"></rh-application-list-identity>
         <rh-application-list-personal name="personal"></rh-application-list-personal>
         <rh-application-list-before-exam name="before-exam"></rh-application-list-before-exam>
+        <rh-realme name="realme"></rh-realme>
         <rh-application-list-before-exam-confirm name="before-exam-confirm"></rh-application-list-before-exam-confirm>
         <rh-application-list-exam name="exam"></rh-application-list-exam>
         <rh-application-list-exam-done name="exam-done"></rh-application-list-exam-done>
@@ -107,8 +109,9 @@ class RhApp extends PolymerElement {
     if (!page) {
       this.page = 'landing';
     } 
-    else if (['landing', 'complete', 'eyeTest'].indexOf(page) !== -1) {
-      this.page = page
+    else if (['landing', 'complete', 'eyeTest', 'realme'].indexOf(page) !== -1) {
+      if(['realme'].indexOf(page) !== -1){this.set('showLogoHeader', false);}
+      this.page = page;
     } 
     else if(page==='applicationList') {
       if(subPage){
@@ -149,6 +152,9 @@ class RhApp extends PolymerElement {
         break;
       case 'before-exam':
         import('./pages/rh-application-list-before-exam.js');
+        break;
+      case 'realme':
+        import('./pages/rh-realme.js');
         break;
       case 'before-exam-confirm':
         import('./pages/rh-application-list-before-exam-confirm.js');
