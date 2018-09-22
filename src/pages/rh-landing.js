@@ -13,7 +13,7 @@ export default class RhLanding extends PolymerElement {
       <style>
         .landing-title {
           text-align: center;
-          max-width: 390px;
+          max-width: 450px;
           margin: 0 auto;
           margin-bottom: 60px;
         }

@@ -18,7 +18,6 @@ export default class RhApplicationList extends PolymerElement {
         .application-list-card {
           padding: 30px 20px;
           background: white;
-          /* margin: 15px auto; */
           border-radius: 12px;
           box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.15), 0 1px 2px 0 rgba(0,0,0,0.2);
           margin-right: 20px;
@@ -31,9 +30,9 @@ export default class RhApplicationList extends PolymerElement {
 
         }
 
-        /* .application-list-card:hover {
-          box-shadow: 2px 2px 24px 0 rgba(141,141,141,0.5);
-        } */
+        .application-list-card:hover {
+          box-shadow: 6px 6px 24px 8px rgba(141,141,141,0.5);
+        }
 
         .application-list-card:last-of-type {
           margin-right: 0;

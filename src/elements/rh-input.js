@@ -12,8 +12,14 @@ export default class RhInput extends PolymerElement {
           width: 100%;
           border: none;
           border-bottom: 1px solid black;
-          padding: 5px 10px;
+          padding: 5px 0;
+          background: none;
           @apply --custom-button-styles;
+        }
+
+        .input:focus {
+          outline: none;
+          background: white;
         }
 
         .label {
@@ -49,7 +55,7 @@ export default class RhInput extends PolymerElement {
             </select>
           </div>
           <iron-autogrow-textarea class="textarea" input-type="textarea"></iron-autogrow-textarea>
-          <input input-type="default" type="[[type]]" class="input"/>
+          <input input-type="default" type="[[type]]" placeholder=[[placeholder]] class="input"/>
         </iron-pages>
       </div>
     `;
@@ -58,7 +64,8 @@ export default class RhInput extends PolymerElement {
     return {
       label: String,
       description: String,
-      type: String
+      type: String,
+      placeholder: String
     }
   }
   static get observers() {

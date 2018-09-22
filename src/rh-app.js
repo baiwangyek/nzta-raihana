@@ -45,11 +45,11 @@ class RhApp extends PolymerElement {
         }
 
         .raihana {
-          font-weight: 500;
+          font-weight: 600;
           color: black;
           font-family: 'Montserrat Alternates', sans-serif;
           text-decoration: none;
-          font-size: 20px;
+          font-size: 18px;
         }
       </style>
 
@@ -57,17 +57,16 @@ class RhApp extends PolymerElement {
       <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
       <app-route route="{{subroute}}" pattern="[[rootPath]]:subPage" data="{{subrouteData}}"></app-route>
 
-      <!-- <template is="dom-if" if=[[showGoHome]]> -->
-        <div class="header">
-          <a class="raihana" href="/applicationList">Raihana</a>
-        </div>
-      <!-- </template> -->
+      <div class="header">
+        <a class="raihana" href="/applicationList">Raihana</a>
+      </div>
       <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
         <rh-landing name="landing"></rh-landing>
         <rh-application-list name="applicationList"></rh-application-list>
         <rh-eye-test name="eyeTest"></rh-eye-test>
         <rh-application-list-identity name="identity"></rh-application-list-identity>
         <rh-application-list-medical name="medical"></rh-application-list-medical>
+        <rh-application-list-personal name="personal"></rh-application-list-personal>
       </iron-pages>
     `;
   }
@@ -142,6 +141,9 @@ class RhApp extends PolymerElement {
         break;
       case 'medical':
         import('./pages/rh-application-list-medical.js');
+        break;
+      case 'personal':
+        import('./pages/rh-application-list-personal.js');
         break;
       case 'view404':
         import('./my-view404.js');
