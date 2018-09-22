@@ -265,47 +265,54 @@ export default class RhEyeTest extends PolymerElement {
 
         <div slot="content-two">
           <div class="eye-test__uber-black">
+            <template is="dom-if" if=[[fullyLoaded]]>
 
-            <template is="dom-if" if="{{_isEqualTo(mode, 'failed')}}">
-             <b class="h2 font-weight--bold eye-test__full-middle">You failed ❌</b>
-            </template>
+              <template is="dom-if" if="{{_isEqualTo(mode, 'failed')}}">
+               <b class="h2 font-weight--bold eye-test__full-middle">You failed ❌</b>
+              </template>
 
-            <template is="dom-if" if="{{_isEqualTo(mode, 'passed')}}">
-             <b class="h2 font-weight--bold eye-test__full-middle">You passed ✅</b>
-            </template>
+              <template is="dom-if" if="{{_isEqualTo(mode, 'passed')}}">
+               <b class="h2 font-weight--bold eye-test__full-middle">You passed ✅</b>
+              </template>
 
-            <template is="dom-if" if="{{_isEqualTo(mode, 'sitting')}}">
+              <template is="dom-if" if="{{_isEqualTo(mode, 'sitting')}}">
 
-              <template is="dom-if" if=[[showTheRightScreen]]>
-                <progress style="display: none" max="5" value="[[badFramaesForLast3Seconds]]"></progress>
-                <div style="display: none" class="eye-test__positionmeter">Positionmeter</div>
-                <div class="eye-test__exam">
-                  <table class="eye-test__table">
-                    <tr>
-                      <td></td>
-                      <td class="h3">up</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td class="h3">left</td>
-                      <td><div class$="[[eCharacterClass]]">E</div></td>
-                      <td class="h3">right</td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td class="h3">down</td>
-                      <td></td>
-                    </tr>
-                  </table>
-                </div>
+                <template is="dom-if" if=[[showTheRightScreen]]>
+                  
+                  <div class="h2" style="text-align: center">
+                    &nbsp;
+                    <template is="dom-if" if="{{moreThan5BadFramaesForLast3Seconds(badFramaesForLast3Seconds)}}">
+                      <span>Stop cheating 😠</span>
+                    </template>
+                  </div>
+                  <div style="display: none" class="eye-test__positionmeter">Positionmeter</div>
+                  <div class="eye-test__exam">
+                    <table class="eye-test__table">
+                      <tr>
+                        <td></td>
+                        <td class="h3">up</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="h3">left</td>
+                        <td><div class$="[[eCharacterClass]]">E</div></td>
+                        <td class="h3">right</td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td class="h3">down</td>
+                        <td></td>
+                      </tr>
+                    </table>
+                  </div>
+                </template>
+              </template>
+
+              <template is="dom-if" if="{{_isEqualTo(mode, 'setup')}}">
+                <b class="h1 font-weight--bold eye-test__mode">Setup</b>
+                <b class="h2 font-weight--bold eye-test__full-middle">[[instructions]]</b>
               </template>
             </template>
-
-            <template is="dom-if" if="{{_isEqualTo(mode, 'setup')}}">
-              <b class="h1 font-weight--bold eye-test__mode">Setup</b>
-              <b class="h2 font-weight--bold eye-test__full-middle">[[instructions]]</b>
-            </template>
-
           </div>
         </div>
 
@@ -327,10 +334,14 @@ export default class RhEyeTest extends PolymerElement {
         type: Boolean,
         value: true,
       },
+      fullyLoaded: {
+        type: Boolean,
+        value: false,        
+      },
       mode: { // [setup, sitting]
         type: String,
-        value: 'setup',
-        // value: 'sitting',
+        // value: 'setup',
+        value: 'sitting',
       },
       successfulAttempts: {
         type: Number,
@@ -356,6 +367,9 @@ export default class RhEyeTest extends PolymerElement {
     ]
   }
 
+  moreThan5BadFramaesForLast3Seconds(badFramaesForLast3Seconds) {
+    return badFramaesForLast3Seconds > 5;
+  }
 
   startCamera() {
     video = this.shadowRoot.getElementById('video');
@@ -391,6 +405,7 @@ export default class RhEyeTest extends PolymerElement {
 
   startVideoProcessing() {
     if (!streaming) { console.warn("Please startup your webcam"); return; }
+    this.set('fullyLoaded', true)
     this.stopVideoProcessing();
     canvasInput = this.shadowRoot.querySelector('#canvasInput');
     canvasInput.width = videoWidth;
