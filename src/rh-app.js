@@ -43,17 +43,25 @@ class RhApp extends PolymerElement {
           top: 0;
           left: 0;
         }
+
+        .raihana {
+          font-weight: 500;
+          color: black;
+          font-family: 'Montserrat Alternates', sans-serif;
+          text-decoration: none;
+          font-size: 20px;
+        }
       </style>
 
       <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
       <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
       <app-route route="{{subroute}}" pattern="[[rootPath]]:subPage" data="{{subrouteData}}"></app-route>
 
-      <template is="dom-if" if=[[showGoHome]]>
+      <!-- <template is="dom-if" if=[[showGoHome]]> -->
         <div class="header">
-          <rh-button label="Go home" on-click="goHome"></rh-button>
+          <a class="raihana" href="/applicationList">Raihana</a>
         </div>
-      </template>
+      <!-- </template> -->
       <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
         <rh-landing name="landing"></rh-landing>
         <rh-application-list name="applicationList"></rh-application-list>

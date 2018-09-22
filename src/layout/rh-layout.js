@@ -6,7 +6,7 @@ export default class RhLayout extends PolymerElement {
       ${globalCSS}
       <style>
         .layout-container {
-          max-width: 600px;
+          max-width: 1200px;
           width: 90%;
           height: 100vh;
           margin: 0 auto;
@@ -14,8 +14,8 @@ export default class RhLayout extends PolymerElement {
         }
 
         .layout-container--narrow {
-          max-width: 450px;
-          width: 90%;
+          /* max-width: 450px;
+          width: 90%; */
         }
       </style>
       <div class="layout-container">
