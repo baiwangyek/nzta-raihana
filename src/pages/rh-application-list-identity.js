@@ -3,6 +3,8 @@ import { globalCSS } from '../global-css/global-css';
 
 import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/iron-icons/iron-icons.js';
+import '@polymer/iron-image/iron-image.js';
+import RhTwoColLayout from '../layout/rh-two-col-layout.js';
 
 import RhLayout from '../layout/rh-layout.js';
 import RhButton from '../elements/rh-button.js';
@@ -12,6 +14,11 @@ export default class RhApplicationListIdentity extends PolymerElement {
     return html`
       ${globalCSS}
       <style>
+        .side-image {
+          height: 100vh;
+          width: 100%;
+        }
+
         .identity-description {
           white-space: pre-line;
         }
@@ -53,13 +60,10 @@ export default class RhApplicationListIdentity extends PolymerElement {
           cursor: pointer;
         }
       </style>
-      <rh-layout narrow>
-        <div slot="content">
-          <h2 class="h2 font-weight--bold title-spacing">Prove identity</h2>
-          <p class="p identity-description">We need your ID
-          The following types of ID are available:
-            - NZ passport
-            - Birth certificate
+      <rh-two-col-layout>
+        <div slot="content-one">
+          <h2 class="h2 font-weight--bold title-spacing">Take a selfie!</h2>
+          <p class="p identity-description">We need a photo of you for your license :-)
           </p>
           <div class="CTA-container">
             <rh-button class="identity-button" label="Upload File" on-click="uploadFileHandler"></rh-button>
@@ -68,16 +72,22 @@ export default class RhApplicationListIdentity extends PolymerElement {
           <template is="dom-if" if=[[uploadFile]]>
             <div>
               <div class="passport-container" style="">
-                <img class="passport-img" src="../../images/passport.png">
-                <p class="passport-name">passport.jpg</p>
+                <img class="passport-img" src="../../images/profile.png">
+                <p class="passport-name">photo.jpg</p>
                 <iron-icon icon="icons:clear"></iron-icon>
               </div>
             </div>
           </template>
-          <rh-button style="display: block; margin-bottom: 20px; margin-top: 40px;" label="Next"></rh-button>
-          <rh-button on-click="goBack" label="Back"></rh-button>
+          <a href="/applicationList/personal">
+            <rh-button style="display: block; margin-bottom: 20px; margin-top: 40px;" label="Next"></rh-button>
+          </a>
+          <rh-button ghost on-click="goBack" label="Back"></rh-button>
         </div>
-      </rh-layout>
+        <div slot="content-two">
+          <iron-image class="side-image" sizing="cover" preload src="../../images/personal-image.png"></iron-image>
+        </div>
+
+      </rh-two-col-layout>
     `;
   }
   static get properties(){
