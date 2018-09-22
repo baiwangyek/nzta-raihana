@@ -62,16 +62,18 @@ export default class RhApplicationListIdentity extends PolymerElement {
             - Birth certificate
           </p>
           <div class="CTA-container">
-            <rh-button class="identity-button" label="Upload File"></rh-button>
+            <rh-button class="identity-button" label="Upload File" on-click="uploadFileHandler"></rh-button>
             <rh-button class="identity-button" label="Take photo"></rh-button>
           </div>
-          <div>
-            <div class="passport-container" style="">
-              <img class="passport-img" src="../../images/passport.png">
-              <p class="passport-name">passport.jpg</p>
-              <iron-icon icon="icons:clear"></iron-icon>
+          <template is="dom-if" if=[[uploadFile]]>
+            <div>
+              <div class="passport-container" style="">
+                <img class="passport-img" src="../../images/passport.png">
+                <p class="passport-name">passport.jpg</p>
+                <iron-icon icon="icons:clear"></iron-icon>
+              </div>
             </div>
-          </div>
+          </template>
           <rh-button style="display: block; margin-bottom: 20px; margin-top: 40px;" label="Next"></rh-button>
           <rh-button label="Back"></rh-button>
         </div>
@@ -80,6 +82,10 @@ export default class RhApplicationListIdentity extends PolymerElement {
   }
   static get properties(){
     return {
+      uploadFile: {
+        type: Boolean,
+        value: false
+      }
     }
   }
   static get observers() {
@@ -88,6 +94,10 @@ export default class RhApplicationListIdentity extends PolymerElement {
   }
   connectedCallback() {
     super.connectedCallback();
+  }
+
+  uploadFileHandler() {
+    this.set('uploadFile', true);
   }
 }
 window.customElements.define('rh-application-list-identity', RhApplicationListIdentity);
