@@ -84,7 +84,7 @@ export default class RhApplicationListBeforeExam extends PolymerElement {
           <p style="margin-top: 30px;">To continue, get your referee to enter their driver license number login to RealMe</p>
           <rh-input class="before-license" type="text" label="License Number" style=""></rh-input>
           <div class="CTA-container">
-            <a href="/applicationList/before-exam-confirm"><rh-button label="Next"></rh-button></a>
+            <a href="/applicationList/realme"><rh-button label="Next"></rh-button></a>
             <rh-button ghost on-click="goBack" label="Back"></rh-button>
           </div>
         </div>
