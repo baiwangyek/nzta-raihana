@@ -82,7 +82,7 @@ export default class RhApplicationListMedical extends PolymerElement {
           </template>
 
           <rh-button style="display: block; margin-bottom: 20px; margin-top: 40px;" label="Next"></rh-button>
-          <rh-button label="Back"></rh-button> 
+          <rh-button label="Back" on-click="goBack"></rh-button> 
         </div>
       </rh-layout>
     `;
@@ -105,6 +105,10 @@ export default class RhApplicationListMedical extends PolymerElement {
   }
   connectedCallback() {
     super.connectedCallback();
+  }
+
+  goBack() {
+    window.history.back();
   }
 
   uploadFileHandler() {

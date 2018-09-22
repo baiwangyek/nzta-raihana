@@ -82,13 +82,15 @@ class RhApp extends PolymerElement {
 
   static get observers() {
     return [
-      '_routePageChanged(route.path)',
+      '_routePageChanged(route.path, routeData.page ,subrouteData.subPage)',
     ];
   }
 
   _routePageChanged(route) {
-    var page = this.routeData.page;
-    var subPage = this.subrouteData.subPage;
+    var page = this.route.path.split('/')[1];
+    var subPage = this.route.path.split('/')[2];
+    // console.log('page', page);
+    // console.log('subpage', subPage);
     // Show the corresponding page according to the route.
     //
     // If no page was found in the route data, page will be an empty string.
@@ -140,7 +142,6 @@ class RhApp extends PolymerElement {
   }
 
   goHome() {
-    this.set('subrouteData.subPage', '');
     this.set('route.path', '/applicationList');
   }
 }

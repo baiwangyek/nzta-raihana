@@ -75,7 +75,7 @@ export default class RhApplicationListIdentity extends PolymerElement {
             </div>
           </template>
           <rh-button style="display: block; margin-bottom: 20px; margin-top: 40px;" label="Next"></rh-button>
-          <rh-button label="Back"></rh-button>
+          <rh-button on-click="goBack" label="Back"></rh-button>
         </div>
       </rh-layout>
     `;
@@ -98,6 +98,10 @@ export default class RhApplicationListIdentity extends PolymerElement {
 
   uploadFileHandler() {
     this.set('uploadFile', true);
+  }
+
+  goBack() {
+    window.history.back();
   }
 }
 window.customElements.define('rh-application-list-identity', RhApplicationListIdentity);
