@@ -47,6 +47,41 @@ let srcMat;
 let grayMat;
 let intervalId;
 
+
+var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+var SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList
+var SpeechRecognitionEvent = window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent
+
+var beep = (function () {
+  var ctxClass = window.audioContext ||window.AudioContext || window.AudioContext || window.webkitAudioContext
+  var ctx = new ctxClass();
+  return function (duration, type, finishedCallback) {
+    duration = +duration;
+
+    // Only 0-4 are valid types.
+    type = (type % 5) || 0;
+
+    if (typeof finishedCallback != "function") {
+        finishedCallback = function () {};
+    }
+
+    var osc = ctx.createOscillator();
+
+    osc.type = type;
+    //osc.type = "sine";
+
+    osc.connect(ctx.destination);
+    if (osc.noteOn) osc.noteOn(0); // old browsers
+    if (osc.start) osc.start(); // new browsers
+
+    setTimeout(function () {
+        if (osc.noteOff) osc.noteOff(0); // old browsers
+        if (osc.stop) osc.stop(); // new browsers
+        finishedCallback();
+    }, duration);
+  };
+})();
+
 export default class RhEyeTest extends PolymerElement {
   static get template() {
     return html`
@@ -157,6 +192,7 @@ export default class RhEyeTest extends PolymerElement {
         .eye-test__table {
           width: 100%;
           height: 100%;
+          table-layout: fixed;
         }
         .eye-test__table td {
           text-align: center;
@@ -195,9 +231,9 @@ export default class RhEyeTest extends PolymerElement {
           <h2 class="h3 font-weight--med application-list-title sub-title-spacing">Eye Check</h2>
           <p>Let's test your eyes</p>
           <p>&nbsp;</p>
-          <p>&nbsp;·&nbsp;Enable your webcam and microphone</p>
-          <p>&nbsp;·&nbsp;Stay about two meteres away</p>
-          <p>&nbsp;·&nbsp;Yell out which direction the E is facing</p>
+          <p>&nbsp;·&nbsp;&nbsp;&nbsp;&nbsp;Enable your webcam and microphone</p>
+          <p>&nbsp;·&nbsp;&nbsp;&nbsp;&nbsp;Stay about two meteres away</p>
+          <p>&nbsp;·&nbsp;&nbsp;&nbsp;&nbsp;Yell out which direction the E is facing</p>
 
           <div id="info" class="text-center">
             Eye Check is loading...
@@ -212,39 +248,50 @@ export default class RhEyeTest extends PolymerElement {
           </div>
 
 
-          <rh-button data-id="123" data-step$=[[item.step]] label="Next" on-click="checkEyeTestCharacter"></rh-button>
+          <template is="dom-if" if="{{_isEqualTo(mode, 'passed')}}">
+            <a href="/applicationList/exam">
+              <rh-button data-id="123" data-step$=[[item.step]] label="Next"></rh-button>
+            </a>
+          </template>
+          <rh-button ghost on-click="goBack" label="Back"></rh-button>
         </div>
 
         <div slot="content-two">
           <div class="eye-test__uber-black">
 
             <template is="dom-if" if="{{_isEqualTo(mode, 'failed')}}">
-             <h1>You failed</h1>
+             <b class="h2 font-weight--bold eye-test__full-middle">You failed ❌</b>
+            </template>
+
+            <template is="dom-if" if="{{_isEqualTo(mode, 'passed')}}">
+             <b class="h2 font-weight--bold eye-test__full-middle">You passed ✅</b>
             </template>
 
             <template is="dom-if" if="{{_isEqualTo(mode, 'sitting')}}">
 
-              <progress max="5" value="[[badFramaesForLast3Seconds]]"></progress>
-              <div class="eye-test__positionmeter">Positionmeter</div>
-              <div class="eye-test__exam">
-                <table class="eye-test__table">
-                  <tr>
-                    <td></td>
-                    <td class="h1">1</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td class="h1">4</td>
-                    <td><div class$="[[eCharacterClass]]">E</div></td>
-                    <td class="h1">2</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td class="h1">3</td>
-                    <td></td>
-                  </tr>
-                </table>
-              </div>
+              <template is="dom-if" if=[[showTheRightScreen]]>
+                <progress max="5" value="[[badFramaesForLast3Seconds]]"></progress>
+                <div class="eye-test__positionmeter">Positionmeter</div>
+                <div class="eye-test__exam">
+                  <table class="eye-test__table">
+                    <tr>
+                      <td></td>
+                      <td class="h3">up</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="h3">left</td>
+                      <td><div class$="[[eCharacterClass]]">E</div></td>
+                      <td class="h3">right</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td class="h3">down</td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </template>
             </template>
 
             <template is="dom-if" if="{{_isEqualTo(mode, 'setup')}}">
@@ -269,6 +316,10 @@ export default class RhEyeTest extends PolymerElement {
         type: String,
         value: '',        
       },
+      showTheRightScreen: {
+        type: Boolean,
+        value: true,
+      },
       mode: { // [setup, sitting]
         type: String,
         // value: 'setup',
@@ -278,13 +329,17 @@ export default class RhEyeTest extends PolymerElement {
         type: Number,
         value: 0,
       },
+      overallAttempts: {
+        type: Number,
+        value: 0,
+      },
       badFramaesForLast3Seconds: {
         type: Number,
         value: 0,
       },
       eCharacterClass: {
         type: String,
-        value: "eye-test__character-" + (Math.floor(Math.random() * 4) + 1),
+        value: `eye-test__character-${(Math.floor(Math.random() * 4) + 1)}`,
       }
     }
   }
@@ -304,12 +359,12 @@ export default class RhEyeTest extends PolymerElement {
 
     if (streaming) return;
     navigator.mediaDevices.getUserMedia({video: resolution, audio: false})
-      .then(function(s) {
+    .then((s) => {
       stream = s;
       video.srcObject = s;
       video.play();
     })
-      .catch(function(err) {
+    .catch((err) => {
       console.log("An error occured! " + err);
     });
 
@@ -456,31 +511,106 @@ export default class RhEyeTest extends PolymerElement {
     }
   }
 
+  newRecognition() {
+    const grammar = '#JSGF V1.0; grammar numbers; public <number> = up | right | down | left ;'
+    const recognition = new SpeechRecognition();
+    const speechRecognitionList = new SpeechGrammarList();
+    speechRecognitionList.addFromString(grammar,  Number.MAX_SAFE_INTEGER);
+    recognition.grammars = speechRecognitionList;
+    recognition.continuous = true;
+    recognition.continuos = true;
+    recognition.interimResults = false;
+    recognition.lang = "en-US";
+    recognition.maxAlternatives = 1;
+    recognition.start();
+    return recognition;
+  }
+
+  blink() {
+    this.set('showTheRightScreen', false);
+    setTimeout(() => {
+      this.set('showTheRightScreen', true);
+    }, 250);
+  }
+
+  beep() {
+    beep();
+  }
+  
   connectedCallback() {
     super.connectedCallback(); 
-    const contEl = this.shadowRoot.querySelector('#container');
-    console.log('contEl',contEl)
 
     afterNextRender(this, () => {
       this.initUI();
       this.startCamera();
       info.innerHTML = '';
-    })
 
+      let recognition = this.newRecognition();
+
+      recognition.onspeechend = () => {
+        console.log('Speech recognition has stopped.');
+      }
+
+      recognition.onresult = (event) => {
+        var last = event.results.length - 1;
+        var transcript = event.results[last][0].transcript.trim();
+
+        console.log('event.results[last][0]', event.results[last][0])
+
+        var num;
+        if (` ${transcript} `.indexOf('up') !== -1) {
+          num = 1;
+        } else if (` ${transcript} `.indexOf('right') !== -1) {
+          num = 2;
+        } else if (` ${transcript} `.indexOf('down') !== -1) {
+          num = 3;
+        } else if (` ${transcript} `.indexOf('left') !== -1) {
+          num = 4;
+        } else {
+          num = -1;
+        }
+
+        if (num !== -1) {
+          if (`eye-test__character-${num}` == this.eCharacterClass) {
+            this.set('eCharacterClass', `eye-test__character-${(Math.floor(Math.random() * 4) + 1)}`)
+            this.set('successfulAttempts', this.successfulAttempts + 1)
+            this.set('overallAttempts', this.overallAttempts + 1)
+
+            this.blink();
+            this.beep();
+
+          } else {
+            this.set('overallAttempts', this.overallAttempts + 1)
+
+            this.blink();
+            this.beep();
+          }
+
+          setTimeout(() => this.checkCompletion(), 0);
+        } else {
+          // no-op
+        }
+
+      }
+    })
   }
+
+  checkCompletion() {
+    if (this.overallAttempts >= 4) {
+      if (this.successfulAttempts >= 2) {
+        this.set('mode', 'passed')
+      } else {
+        this.set('mode', 'failed')
+      }
+    }
+  }
+
 
   disconnectedCallback() {
     clearInterval(intervalId);
   }
-
-  goToApplicationStep(e) {
-    var applicationStep = e.currentTarget.dataset.step;
-    console.log(applicationStep);
-  }
-
-  checkEyeTestCharacter(e) {
-    const character = this.shadowRoot.querySelector("#eye-test-character").getValue();
-    console.log('character',character);
+  goBack() {
+    window.history.back();
   }
 
 }
