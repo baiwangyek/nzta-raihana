@@ -529,7 +529,7 @@ export default class RhEyeTest extends PolymerElement {
     this.recognition.grammars = speechRecognitionList;
     this.recognition.continuous = true;
     this.recognition.continuos = true;
-    this.recognition.interimResults = false;
+    this.recognition.interimResults = true;
     this.recognition.lang = "en-US";
     this.recognition.maxAlternatives = 1;
     this.recognition.start();
@@ -551,9 +551,9 @@ export default class RhEyeTest extends PolymerElement {
         num = 1;
       } else if (` ${transcript} `.indexOf('right') !== -1) {
         num = 2;
-      } else if (` ${transcript} `.indexOf('down') !== -1) {
+      } else if (` ${transcript} `.indexOf('down') !== -1 || ` ${transcript} `.indexOf("don't") !== -1) {
         num = 3;
-      } else if (` ${transcript} `.indexOf('left') !== -1) {
+      } else if (` ${transcript} `.indexOf('left') !== -1 || ` ${transcript} `.indexOf('let') !== -1) {
         num = 4;
       } else {
         num = -1;
@@ -576,6 +576,8 @@ export default class RhEyeTest extends PolymerElement {
         }
 
         setTimeout(() => this.checkCompletion(), 0);
+        this.recognition = this.newRecognition();
+
       } else {
         // no-op
       }
