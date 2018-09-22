@@ -118,11 +118,11 @@ export default class RhEyeTest extends PolymerElement {
           appearance: none;
           width: 100%;
           height: 10px;
-          background: red
+          background: #861b1b;
         }
 
         progress::-webkit-progress-value {
-          background: red
+          background: #861b1b;
         }
 
         .eye-test__desc p {
@@ -150,7 +150,41 @@ export default class RhEyeTest extends PolymerElement {
           align-items: center;
           justify-content: center;
         }
-
+        .eye-test__exam {
+          display: flex;
+          height: 100%;
+        }
+        .eye-test__table {
+          width: 100%;
+          height: 100%;
+        }
+        .eye-test__table td {
+          text-align: center;
+          vertical-align: middle;
+        }
+        .eye-test__character-1 {
+          font-size: 56px;
+          transform: rotate(270deg) translateX(0px) translateY(0);
+          font-family: sans-serif;
+        }
+        .eye-test__character-2 {
+          font-size: 56px;
+          transform: rotate(0deg);
+          font-family: sans-serif;
+        }
+        .eye-test__character-3 {
+          font-size: 56px;
+          transform: rotate(90deg) translateX(0px) translateY(5px);
+          font-family: sans-serif;
+        }
+        .eye-test__character-4 {
+          font-size: 56px;
+          transform: rotate(180deg) translateX(0px) translateY(0);
+          font-family: sans-serif;          
+        }
+        .eye-test__positionmeter {
+          margin: 20px 0;
+        }
 
 
       </style>
@@ -189,8 +223,28 @@ export default class RhEyeTest extends PolymerElement {
             </template>
 
             <template is="dom-if" if="{{_isEqualTo(mode, 'sitting')}}">
+
               <progress max="5" value="[[badFramaesForLast3Seconds]]"></progress>
-              <div>E</div>
+              <div class="eye-test__positionmeter">Positionmeter</div>
+              <div class="eye-test__exam">
+                <table class="eye-test__table">
+                  <tr>
+                    <td></td>
+                    <td class="h1">1</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="h1">4</td>
+                    <td><div class$="[[eCharacterClass]]">E</div></td>
+                    <td class="h1">2</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="h1">3</td>
+                    <td></td>
+                  </tr>
+                </table>
+              </div>
             </template>
 
             <template is="dom-if" if="{{_isEqualTo(mode, 'setup')}}">
@@ -228,6 +282,10 @@ export default class RhEyeTest extends PolymerElement {
         type: Number,
         value: 0,
       },
+      eCharacterClass: {
+        type: String,
+        value: "eye-test__character-" + (Math.floor(Math.random() * 4) + 1),
+      }
     }
   }
 
