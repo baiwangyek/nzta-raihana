@@ -44,9 +44,10 @@ export default class RhInput extends PolymerElement {
           width: 100%;
           font-size: 14px;
         }
+
       </style>
       <div>
-        <p class="label font-weight--bold">[[label]]</p>
+        <p style="padding-bottom: 5px;" class="label font-weight--bold">[[label]]</p>
         <iron-pages selected=[[inputType]] attr-for-selected="input-type">
           <div input-type="dropdown" class="styled-select black rounded">
             <select on-change="dropdownSelected">
