@@ -413,6 +413,8 @@ export default class RhEyeTest extends PolymerElement {
         if (this.badFramaesForLast3Seconds < 5) {
           this.set('mode', 'sitting');
           this.set('badFramaesForLast3Seconds', 0);
+          this.recognition = this.newRecognition();
+
         } else {      
           this.set('badFramaesForLast3Seconds', 0);
         }
@@ -519,18 +521,68 @@ export default class RhEyeTest extends PolymerElement {
   }
 
   newRecognition() {
+    console.log('starting speach recogniton...')
     const grammar = '#JSGF V1.0; grammar numbers; public <number> = up | right | down | left ;'
-    const recognition = new SpeechRecognition();
+    this.recognition = new SpeechRecognition();
     const speechRecognitionList = new SpeechGrammarList();
     speechRecognitionList.addFromString(grammar,  Number.MAX_SAFE_INTEGER);
-    recognition.grammars = speechRecognitionList;
-    recognition.continuous = true;
-    recognition.continuos = true;
-    recognition.interimResults = false;
-    recognition.lang = "en-US";
-    recognition.maxAlternatives = 1;
-    recognition.start();
-    return recognition;
+    this.recognition.grammars = speechRecognitionList;
+    this.recognition.continuous = true;
+    this.recognition.continuos = true;
+    this.recognition.interimResults = false;
+    this.recognition.lang = "en-US";
+    this.recognition.maxAlternatives = 1;
+    this.recognition.start();
+    this.recognition.onspeechend = () => {
+      console.log('Speech this.recognition has stopped.');
+      setTimeout(() => {
+        this.recognition = this.newRecognition();
+      }, 250);
+    }
+
+    this.recognition.onresult = (event) => {
+      var last = event.results.length - 1;
+      var transcript = event.results[last][0].transcript.trim();
+
+      console.log('event.results[last][0]', event.results[last][0])
+
+      var num;
+      if (` ${transcript} `.indexOf('up') !== -1) {
+        num = 1;
+      } else if (` ${transcript} `.indexOf('right') !== -1) {
+        num = 2;
+      } else if (` ${transcript} `.indexOf('down') !== -1) {
+        num = 3;
+      } else if (` ${transcript} `.indexOf('left') !== -1) {
+        num = 4;
+      } else {
+        num = -1;
+      }
+
+      if (num !== -1) {
+        if (`eye-test__character-${num}` == this.eCharacterClass) {
+          this.set('eCharacterClass', `eye-test__character-${(Math.floor(Math.random() * 4) + 1)}`)
+          this.set('successfulAttempts', this.successfulAttempts + 1)
+          this.set('overallAttempts', this.overallAttempts + 1)
+
+          this.blink();
+          this.beep();
+
+        } else {
+          this.set('overallAttempts', this.overallAttempts + 1)
+
+          this.blink();
+          this.beep();
+        }
+
+        setTimeout(() => this.checkCompletion(), 0);
+      } else {
+        // no-op
+      }
+
+    }
+
+    return this.recognition;
   }
 
   blink() {
@@ -551,54 +603,7 @@ export default class RhEyeTest extends PolymerElement {
       this.initUI();
       this.startCamera();
       info.innerHTML = '';
-
-      let recognition = this.newRecognition();
-
-      recognition.onspeechend = () => {
-        console.log('Speech recognition has stopped.');
-      }
-
-      recognition.onresult = (event) => {
-        var last = event.results.length - 1;
-        var transcript = event.results[last][0].transcript.trim();
-
-        console.log('event.results[last][0]', event.results[last][0])
-
-        var num;
-        if (` ${transcript} `.indexOf('up') !== -1) {
-          num = 1;
-        } else if (` ${transcript} `.indexOf('right') !== -1) {
-          num = 2;
-        } else if (` ${transcript} `.indexOf('down') !== -1) {
-          num = 3;
-        } else if (` ${transcript} `.indexOf('left') !== -1) {
-          num = 4;
-        } else {
-          num = -1;
-        }
-
-        if (num !== -1) {
-          if (`eye-test__character-${num}` == this.eCharacterClass) {
-            this.set('eCharacterClass', `eye-test__character-${(Math.floor(Math.random() * 4) + 1)}`)
-            this.set('successfulAttempts', this.successfulAttempts + 1)
-            this.set('overallAttempts', this.overallAttempts + 1)
-
-            this.blink();
-            this.beep();
-
-          } else {
-            this.set('overallAttempts', this.overallAttempts + 1)
-
-            this.blink();
-            this.beep();
-          }
-
-          setTimeout(() => this.checkCompletion(), 0);
-        } else {
-          // no-op
-        }
-
-      }
+      this.recognition = this.newRecognition();
     })
   }
 
