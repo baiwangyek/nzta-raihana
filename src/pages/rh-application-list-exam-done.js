@@ -49,6 +49,8 @@ export default class RhApplicationListExamDone extends PolymerElement {
         }
 
       </style>
+      <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
+
       <div class="header">
         <p class="header-time" class="h3">12:00 left</p>
         <div class="header-indicator-container">
@@ -59,7 +61,7 @@ export default class RhApplicationListExamDone extends PolymerElement {
       <div class="success-container">
         <h1 class="font-weight--med h1">You passed!</h1>
         <h1 class="h1 font-weight--med success-score">You scored 35 / 35</h1>
-        <rh-button label="Next"></rh-button>
+        <rh-button label="Next" on-click="goToComplete"></rh-button>
       </div>
     `; 
   }
@@ -72,11 +74,12 @@ export default class RhApplicationListExamDone extends PolymerElement {
     ]
   }
 
-  check(check) {
-    return true;
-  }
   connectedCallback() {
     super.connectedCallback();
+  }
+
+  goToComplete() {
+    this.set('route.path', '/complete');
   }
 }
 window.customElements.define('rh-application-list-exam-done', RhApplicationListExamDone);

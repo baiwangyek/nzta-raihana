@@ -87,6 +87,8 @@ export default class RhApplicationListExam extends PolymerElement {
           font-size: 14px;
         }
       </style>
+      <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
+
       <div class="header">
         <p class="header-time" class="h3">60:00 left</p>
         <div class="header-indicator-container">
@@ -100,7 +102,7 @@ export default class RhApplicationListExam extends PolymerElement {
         <p class="question-description" class="h3 font-weight--med">Select the correct answer. You're a good driver if...</p>
         <div class="answers-container">
           <template is="dom-repeat" items="[[answersList]]">
-            <div class="answers-card">
+            <div class="answers-card" on-click="goToExamDone">
               <p class="answers-text">[[item]]</p>
             </div>
           </template>
@@ -122,6 +124,10 @@ export default class RhApplicationListExam extends PolymerElement {
   }
   connectedCallback() {
     super.connectedCallback();
+  }
+
+  goToExamDone() {
+    this.set('route.path', '/applicationList/exam-done');
   }
 }
 window.customElements.define('rh-application-list-exam', RhApplicationListExam);
