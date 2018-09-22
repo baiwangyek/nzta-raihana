@@ -253,6 +253,13 @@ export default class RhEyeTest extends PolymerElement {
               <rh-button data-id="123" data-step$=[[item.step]] label="Next"></rh-button>
             </a>
           </template>
+
+          <template is="dom-if" if="{{_isEqualTo(mode, 'failed')}}">
+            <a href="/applicationList/exam">
+              <rh-button data-id="123" data-step$=[[item.step]] label="Next"></rh-button>
+            </a>
+          </template>
+
           <rh-button ghost on-click="goBack" label="Back"></rh-button>
         </div>
 
