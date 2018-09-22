@@ -1,34 +1,92 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { globalCSS } from '../global-css/global-css';
-export default class RhInput extends PolymerElement {
+import '@polymer/iron-autogrow-textarea/iron-autogrow-textarea.js';
 
+export default class RhInput extends PolymerElement {
   static get template() {
     return html`
       ${globalCSS}
       <style>
         .input {
           font-size: 14px;
+          width: 100%;
           border: none;
           border-bottom: 1px solid black;
           padding: 5px 10px;
           @apply --custom-button-styles;
         }
+
+        .label {
+          font-size: 12px;
+        }
+
+        .styled-select {
+          border-bottom: 1px solid black;
+        }
+
+        .styled-select select {
+          background: transparent;
+          border: none;
+          font-size: 14px;
+          height: 29px;
+          width: 100%;
+        }
+
+        .textarea {
+          border: none;
+          box-shadow: 0 1px 0px 0px black;
+          width: 100%;
+          font-size: 14px;
+        }
       </style>
-      <input type="[[type]]" class="input"/>
+      <div>
+        <p class="label font-weight--bold">[[label]]</p>
+        <iron-pages selected=[[inputType]] attr-for-selected="input-type">
+          <div input-type="dropdown" class="styled-select black rounded">
+            <select on-change="dropdownSelected">
+              <option>Yes</option>
+              <option selected>No</option>
+            </select>
+          </div>
+          <iron-autogrow-textarea class="textarea" input-type="textarea"></iron-autogrow-textarea>
+          <input input-type="default" type="[[type]]" class="input"/>
+        </iron-pages>
+      </div>
     `;
   }
   static get properties(){
     return {
-      label: String
+      label: String,
+      description: String,
+      type: String
     }
   }
   static get observers() {
     return [
+      '_renderInputType(type)'
     ]
   }
 
   connectedCallback() {
     super.connectedCallback();
+  }
+
+  _renderInputType(type) {
+    if(type === 'dropdown'){
+      this.set('inputType', 'dropdown');
+    }
+    else if(type === 'textarea'){
+      this.set('inputType', 'textarea');
+    }
+    else {
+      this.set('inputType', 'default');
+    }
+  }
+
+  dropdownSelected(e) {
+    var selectedIndex = e.currentTarget.selectedIndex;
+    
+    this.dispatchEvent(new CustomEvent('dropdown-change', {detail:{selectedIndex: selectedIndex.toString()}}));
   }
 
   getValue() {

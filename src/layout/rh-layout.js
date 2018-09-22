@@ -14,7 +14,7 @@ export default class RhLayout extends PolymerElement {
         }
 
         .layout-container--narrow {
-          max-width: 400px;
+          max-width: 450px;
           width: 90%;
         }
       </style>

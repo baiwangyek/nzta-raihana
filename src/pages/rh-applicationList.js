@@ -51,7 +51,7 @@ export default class RhApplicationList extends PolymerElement {
         value: [
           {label: 'Prove your identity', step:'identity'},
           {label: 'Personal details', step:'personal'},
-          {label: 'Health checkup', step:'health'},
+          {label: 'Health checkup', step:'medical'},
           {label: 'Start the exam', step:'exam'}
         ]
       },

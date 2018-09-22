@@ -59,6 +59,7 @@ class RhApp extends PolymerElement {
         <rh-application-list name="applicationList"></rh-application-list>
         <rh-eye-test name="eyeTest"></rh-eye-test>
         <rh-application-list-identity name="identity"></rh-application-list-identity>
+        <rh-application-list-medical name="medical"></rh-application-list-medical>
       </iron-pages>
     `;
   }
@@ -128,6 +129,9 @@ class RhApp extends PolymerElement {
         import('./pages/rh-eyeTest.js');
       case 'identity':
         import('./pages/rh-application-list-identity.js');
+        break;
+      case 'medical':
+        import('./pages/rh-application-list-medical.js');
         break;
       case 'view404':
         import('./my-view404.js');
