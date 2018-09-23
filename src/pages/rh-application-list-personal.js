@@ -6,6 +6,8 @@ import '@polymer/iron-image/iron-image.js';
 import RhTwoColLayout from '../layout/rh-two-col-layout.js';
 import RhInput from '../elements/rh-input.js';
 import RhButton from '../elements/rh-button.js';
+ 
+import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
 
 export default class RhPersonalListPersonal extends PolymerElement {
   static get template() {
@@ -15,6 +17,14 @@ export default class RhPersonalListPersonal extends PolymerElement {
         .side-image {
           height: 100vh;
           width: 100%;
+          opacity: 0.001;
+          transition: 0.4s;
+          transform: translate3d(100%,0,0);
+        }
+
+        .side-image--show {
+          opacity: 0.999;
+          transform: translate3d(0,0,0);
         }
 
         .page-item {
@@ -80,14 +90,27 @@ export default class RhPersonalListPersonal extends PolymerElement {
   }
   static get properties(){
     return {
+      active: {
+        type: Boolean,
+        value: false
+      }
     }
   }
   static get observers() {
     return [
+      '_showAnimation(active)'
     ]
   }
   connectedCallback() {
     super.connectedCallback();
+  }
+
+  _showAnimation(active) {
+    afterNextRender(this, ()=>{
+      (active)?
+        this.shadowRoot.querySelector('.side-image').classList.add('side-image--show'):
+        this.shadowRoot.querySelector('.side-image').classList.remove('side-image--show')
+    })
   }
 
   goBack() {
