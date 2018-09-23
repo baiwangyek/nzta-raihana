@@ -48,9 +48,9 @@ export default class RhApplicationListBeforeExamConfirm extends PolymerElement {
             Does everything match up?
         </h3>
         <div style="display: flex; margin-top: 30px;">
-          <iron-image sizing="cover" src="../../images/complete.png" class="complete-image"></iron-image>
+          <iron-image sizing="cover" src="../../images/walt.png" class="complete-image" style="border-radius: 100px;"></iron-image>
           <div class="complete-details-column">
-            <h3 class="h2">Lina Tan</h3>
+            <h3 class="h2">Walter Lim</h3>
             <p class="copy-item">Learner License Exam</p>
             <h3 class="h3 complete-title">About</h3>
             <p class="copy-item">Date of birth: 28/4/1997 (21 years old)</p>

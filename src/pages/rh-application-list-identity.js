@@ -82,7 +82,7 @@ export default class RhApplicationListIdentity extends PolymerElement {
                   <div style="display: flex; align-items: center; padding: 20px 0; justify-content: center;">✅ Verified</div>
                 </template>
                 <div class="passport-container__container">
-                  <img class="passport-img" src="../../images/profile.png">
+                  <img class="passport-img" src="../../images/walt.png">
                   <p class="passport-name">photo.jpg</p>
                   <iron-icon icon="icons:clear"></iron-icon>
                 </div>

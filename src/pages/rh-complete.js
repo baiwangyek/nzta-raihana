@@ -44,9 +44,9 @@ export default class RhComplete extends PolymerElement {
         }
       </style>
       <div class="complete-card-container">
-        <iron-image sizing="cover" src="../../images/complete.png" class="complete-image"></iron-image>
+        <iron-image sizing="cover" src="../../images/walt.png" class="complete-image" style="border-radius: 100px;"></iron-image>
         <div class="complete-details-column">
-          <h3 class="h2">Lina Tan</h3>
+          <h3 class="h2">Walter Lim</h3>
           <p class="copy-item">Learner License</p>
           <p>DS123456 V200</p>
           <div class="CTA-container">
