@@ -11,6 +11,11 @@ export default class RhApplicationList extends PolymerElement {
     return html`
       ${globalCSS}
       <style>
+      @keyframes example {
+          from {transform: translateY(-40px); opacity: 0.5;}
+          to {transform: translateY(0); opacity: 1;}
+      }
+
         .application-list-card {
           padding: 30px 20px;
           background: white;
@@ -20,9 +25,12 @@ export default class RhApplicationList extends PolymerElement {
           margin-right: 20px;
           text-align: center;
           max-width: 350px;
-          transition: 0.4s;
+
           display: flex;
           flex-direction: column;
+
+          animation-name: example;
+          animation-duration: 2s;
 
         }
 
