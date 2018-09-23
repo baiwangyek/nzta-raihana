@@ -9,6 +9,8 @@ import RhTwoColLayout from '../layout/rh-two-col-layout.js';
 import RhLayout from '../layout/rh-layout.js';
 import RhButton from '../elements/rh-button.js';
 
+import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
+ 
 export default class RhApplicationListIdentity extends PolymerElement {
   static get template() {
     return html`
@@ -17,6 +19,14 @@ export default class RhApplicationListIdentity extends PolymerElement {
         .side-image {
           height: 100vh;
           width: 100%;
+          opacity: 0.001;
+          transition: 0.4s;
+          transform: translate3d(100%,0,0);
+        }
+
+        .side-image--show {
+          opacity: 0.999;
+          transform: translate3d(0,0,0);
         }
 
         .identity-description {
@@ -110,15 +120,28 @@ export default class RhApplicationListIdentity extends PolymerElement {
       verifying: {        
         type: Boolean,
         value: false
+      },
+      active: {
+        type: Boolean,
+        value: false
       }
     }
   }
   static get observers() {
     return [
+      '_showAnimation(active)'
     ]
   }
   connectedCallback() {
     super.connectedCallback();
+  }
+
+  _showAnimation(active) {
+    afterNextRender(this, ()=>{
+      (active)?
+        this.shadowRoot.querySelector('.side-image').classList.add('side-image--show'):
+        this.shadowRoot.querySelector('.side-image').classList.remove('side-image--show')
+    })
   }
 
   uploadFileHandler() {

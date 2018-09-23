@@ -58,7 +58,7 @@ class RhApp extends PolymerElement {
           <a class="raihana" href="/applicationList">Raihana</a>
         </div>
       </template>
-      <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
+      <iron-pages selected="[[page]]" attr-for-selected="name" selected-attribute="active" role="main">
         <rh-landing name="landing"></rh-landing>
         <rh-application-list name="applicationList"></rh-application-list>
         <rh-eye-test name="eyeTest"></rh-eye-test>
