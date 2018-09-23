@@ -39,12 +39,15 @@ export default class RhApplicationListIdentity extends PolymerElement {
         }
 
         .passport-container {
-          display: flex;
-          align-items: center;
           margin: 20px 0;
-          background-color: #F3F3F3;
+          background-color: white;
           padding: 10px;
           border-radius: 5px;
+        }
+
+        .passport-container__container {
+          display: flex;
+          align-items: center;
         }
 
         .passport-img {
@@ -72,9 +75,17 @@ export default class RhApplicationListIdentity extends PolymerElement {
           <template is="dom-if" if=[[uploadFile]]>
             <div>
               <div class="passport-container" style="">
-                <img class="passport-img" src="../../images/profile.png">
-                <p class="passport-name">photo.jpg</p>
-                <iron-icon icon="icons:clear"></iron-icon>
+                <template is="dom-if" if=[[verifying]]>
+                  <div style="display: flex; align-items: center; padding: 20px 0; justify-content: center;"><img src="../../images/25.gif" style="width: 16px; height: 16px;">&nbsp;&nbsp;&nbsp;&nbsp;Verifying...</div>
+                </template>
+                <template is="dom-if" if=[[!verifying]]>
+                  <div style="display: flex; align-items: center; padding: 20px 0; justify-content: center;">✅ Verified</div>
+                </template>
+                <div class="passport-container__container">
+                  <img class="passport-img" src="../../images/profile.png">
+                  <p class="passport-name">photo.jpg</p>
+                  <iron-icon icon="icons:clear"></iron-icon>
+                </div>
               </div>
             </div>
           </template>
@@ -95,6 +106,10 @@ export default class RhApplicationListIdentity extends PolymerElement {
       uploadFile: {
         type: Boolean,
         value: false
+      },
+      verifying: {        
+        type: Boolean,
+        value: false
       }
     }
   }
@@ -108,6 +123,10 @@ export default class RhApplicationListIdentity extends PolymerElement {
 
   uploadFileHandler() {
     this.set('uploadFile', true);
+    this.set('verifying', true)
+    setTimeout(() => {
+      this.set('verifying', false)
+    }, 1500);
   }
 
   goBack() {

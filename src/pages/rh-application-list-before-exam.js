@@ -73,15 +73,15 @@ export default class RhApplicationListBeforeExam extends PolymerElement {
       <rh-two-col-layout>
       <div slot="content-one">
           <h2 class="h3 font-weight--med application-list-title sub-title-spacing">Before you begin your test</h2>
-          <p>We need a referee to monitor you while you do your test.</p>
-          <h4 class="h4 before-exam-subtitle">Your referee should:</h4>
+          <p>We need a supervisor to monitor you while you do your test.</p>
+          <h4 class="h4 before-exam-subtitle">Your supervisor should:</h4>
           <ul class="before-ul">
             <li>Be over 16</li>
             <li>Not be a family member or live in the same houseold</li>
             <li>Have a full license</li>
             <li>Have a Realme login</li>
           </ul>
-          <p style="margin-top: 30px;">To continue, get your referee to enter their driver license number login to RealMe</p>
+          <p style="margin-top: 30px;">To continue, get your supervisor to enter their driver license number login to RealMe</p>
           <rh-input class="before-license" type="text" label="License Number" style=""></rh-input>
           <div class="CTA-container">
             <a href="/applicationList/realme"><rh-button label="Next"></rh-button></a>

@@ -232,7 +232,7 @@ export default class RhEyeTest extends PolymerElement {
           <p>Let's test your eyes</p>
           <p>&nbsp;</p>
           <p>&nbsp;·&nbsp;&nbsp;&nbsp;&nbsp;Enable your webcam and microphone</p>
-          <p>&nbsp;·&nbsp;&nbsp;&nbsp;&nbsp;Stay about two meteres away</p>
+          <p>&nbsp;·&nbsp;&nbsp;&nbsp;&nbsp;Stay about two metres away</p>
           <p>&nbsp;·&nbsp;&nbsp;&nbsp;&nbsp;Yell out which direction the E is facing</p>
 
           <div id="info" class="text-center">
@@ -249,25 +249,25 @@ export default class RhEyeTest extends PolymerElement {
 
 
           <template is="dom-if" if="{{_isEqualTo(mode, 'setup')}}">
-            <a href="/applicationList/exam" style="color: #b2d3d8">
+            <a href="/applicationList/before-exam" style="color: #b2d3d8">
               ...
             </a>
           </template>
 
           <template is="dom-if" if="{{_isEqualTo(mode, 'sitting')}}">
-            <a href="/applicationList/exam" style="color: #b2d3d8">
+            <a href="/applicationList/before-exam" style="color: #b2d3d8">
               ...
             </a>
           </template>
 
           <template is="dom-if" if="{{_isEqualTo(mode, 'passed')}}">
-            <a href="/applicationList/exam">
+            <a href="/applicationList/before-exam">
               <rh-button data-id="123" data-step$=[[item.step]] label="Next"></rh-button>
             </a>
           </template>
 
           <template is="dom-if" if="{{_isEqualTo(mode, 'failed')}}">
-            <a href="/applicationList/exam">
+            <a href="/applicationList/before-exam">
               <rh-button data-id="123" data-step$=[[item.step]] label="Next"></rh-button>
             </a>
           </template>
@@ -302,7 +302,7 @@ export default class RhEyeTest extends PolymerElement {
                     <table class="eye-test__table">
                       <tr>
                         <td></td>
-                        <td class="h3">brown</td>
+                        <td class="h3">silver</td>
                         <td></td>
                       </tr>
                       <tr>
@@ -549,7 +549,7 @@ export default class RhEyeTest extends PolymerElement {
 
   newRecognition() {
     console.log('starting speach recogniton...')
-    const grammar = '#JSGF V1.0; grammar numbers; public <number> = brown | orange | gold | yellow ;'
+    const grammar = '#JSGF V1.0; grammar numbers; public <number> = silver | orange | gold | yellow ;'
     this.recognition = new SpeechRecognition();
     const speechRecognitionList = new SpeechGrammarList();
     speechRecognitionList.addFromString(grammar,  Number.MAX_SAFE_INTEGER);
@@ -574,7 +574,7 @@ export default class RhEyeTest extends PolymerElement {
       console.log('event.results[last][0]', event.results[last][0])
 
       var num;
-      if (` ${transcript} `.toLowerCase().indexOf('brown') !== -1) {
+      if (` ${transcript} `.toLowerCase().indexOf('silver') !== -1) {
         num = 1;
       } else if (` ${transcript} `.toLowerCase().indexOf('orange') !== -1)  {
         num = 2;
